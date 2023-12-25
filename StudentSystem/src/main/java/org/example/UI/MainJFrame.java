@@ -81,7 +81,6 @@ public class MainJFrame extends JFrame implements ActionListener {
                             {"编号27", "标题27", "正文27"},
                             {"编号28", "标题28", "正文28"},
                             {"编号29", "标题29", "正文29"},
-                            {"编号30", "标题30", "正文30"},
                     };
                     TableModel data = new DefaultTableModel(tabledatas,tableTitles);
                     StudentTable.setModel(data);
