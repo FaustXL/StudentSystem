@@ -1,11 +1,12 @@
 package org.example;
 
 import org.example.UI.MainJFrame;
+import org.example.UI.loginFrame;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        new MainJFrame(0);
+        new loginFrame();
     }
 }
