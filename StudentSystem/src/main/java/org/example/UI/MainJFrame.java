@@ -7,12 +7,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
-public class MainJFrame extends JFrame implements ActionListener {
+public class MainJFrame extends JFrame implements ActionListener{
     private static JFrame frame;
     private JTabbedPane tabbedPane;
     private JPanel panel1;
@@ -43,6 +40,11 @@ public class MainJFrame extends JFrame implements ActionListener {
     public MainJFrame() {
 
         tabbedPane.addMouseListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc}
+             *
+             * @param e
+             */
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedIndex = tabbedPane.getSelectedIndex();
@@ -91,7 +93,6 @@ public class MainJFrame extends JFrame implements ActionListener {
                     themeComboBox.addItem("Darcu");
                     themeComboBox.addItem("Light");
                 }
-
             }
         });
 
@@ -186,9 +187,13 @@ public class MainJFrame extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+
     }
 }
