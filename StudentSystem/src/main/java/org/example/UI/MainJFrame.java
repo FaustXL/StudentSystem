@@ -159,21 +159,21 @@ public class MainJFrame extends JFrame implements ActionListener{
 
     public void init(){
 
-        frame = new JFrame("主界面");
-        frame.setPreferredSize(new Dimension(1000,800));
-        frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        //设置窗口居中
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
         try {
             UIManager.setLookAndFeel( new FlatIntelliJLaf());
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
+
+        frame = new JFrame("主界面");
+        frame.setPreferredSize(new Dimension(1000,800));
+        frame.setContentPane(panel1);
         SwingUtilities.updateComponentTreeUI(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        //设置窗口居中
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
         themeComboBox.addItem("IntelliJ");
         themeComboBox.addItem("Darcula");
