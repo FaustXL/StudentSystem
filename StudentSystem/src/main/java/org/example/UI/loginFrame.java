@@ -1,5 +1,8 @@
 package org.example.UI;
 
+import org.example.domain.studentUser;
+import org.example.server.impl.studentUserServerImpl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +15,10 @@ public class loginFrame extends JFrame implements ActionListener {
 
     private String usernameStr = "学生账号";
 
+    private JPasswordField passwordText = null;
+    private JTextField usernameText = null;
+
+    private studentUserServerImpl studentUserServer = new studentUserServerImpl();
     public loginFrame(){
         createInterface();
         setInterface();
@@ -51,7 +58,7 @@ public class loginFrame extends JFrame implements ActionListener {
         CONTAINER.add(username);
 
         //账号文本框
-        JTextField usernameText = new JTextField();
+        usernameText = new JTextField();
         usernameText.setBounds(280,245,280,30);
         usernameText.setFont(new Font("微软雅黑",Font.PLAIN,15));
         CONTAINER.add(usernameText);
@@ -64,7 +71,7 @@ public class loginFrame extends JFrame implements ActionListener {
         CONTAINER.add(password);
 
         //密码文本框
-        JPasswordField passwordText = new JPasswordField();
+        passwordText = new JPasswordField();
         passwordText.setBounds(280,315,280,30);
         passwordText.setFont(new Font("微软雅黑",Font.BOLD,20));
         passwordText.setEchoChar('·');
@@ -78,6 +85,8 @@ public class loginFrame extends JFrame implements ActionListener {
         loginButton.setBounds(235,400,150,40);
         loginButton.setFont(loginFont);
         CONTAINER.add(loginButton);
+
+        loginButton.addActionListener(this);
 
         //注册按钮
         JButton registeredButton = new JButton("注册");
@@ -126,6 +135,49 @@ public class loginFrame extends JFrame implements ActionListener {
                 usernameStr = "教师账号";
                 setInterface();
             }
+        }else if (e.getActionCommand().equals("登录")){
+            String username = usernameText.getText();
+            String password = passwordText.getText();
+            if (username.equals("") || password.equals("")){
+                showJDialog("填写的密码或者账号不能为空");
+            }else{
+                studentUser studentUser = new studentUser();
+                studentUser.setUsername(username);
+                studentUser.setPassword(password);
+                boolean loginSucceed = true;
+                try {
+                    loginSucceed = studentUserServer.isLoginSucceed(studentUser);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                if (loginSucceed){
+                    this.setVisible(false);
+                    new MainJFrame(1);
+                }else {
+                    showJDialog("账号或密码不正确");
+                }
+            }
         }
+    }
+
+    public void showJDialog(String content) {
+        //创建一个弹框对象
+        JDialog jDialog = new JDialog();
+        //给弹框设置大小
+        jDialog.setSize(200, 150);
+        //让弹框置顶
+        jDialog.setAlwaysOnTop(true);
+        //让弹框居中
+        jDialog.setLocationRelativeTo(null);
+        //弹框不关闭永远无法操作下面的界面
+        jDialog.setModal(true);
+
+        //创建Jlabel对象管理文字并添加到弹框当中
+        JLabel warning = new JLabel(content);
+        warning.setBounds(0, 0, 200, 150);
+        jDialog.getContentPane().add(warning);
+
+        //让弹框展示出来
+        jDialog.setVisible(true);
     }
 }

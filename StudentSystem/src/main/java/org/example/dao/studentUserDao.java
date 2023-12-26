@@ -5,5 +5,5 @@ import org.example.domain.studentUser;
 import java.util.List;
 
 public interface studentUserDao {
-    List<studentUser> selectAll();
+    studentUser selectByUsername(String username) throws Exception;
 }
