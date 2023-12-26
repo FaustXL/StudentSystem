@@ -61,19 +61,7 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JButton LogOut;
 
     public MainJFrame() {
-        /*try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-        frame = new JFrame("MainJFrame");
-        frame.setPreferredSize(new Dimension(1000,800));
-        frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        //设置窗口居中
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);*/
+        
 
         init();
 
