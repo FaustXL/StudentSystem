@@ -61,7 +61,7 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JButton LogOut;
 
     public MainJFrame() {
-        
+
 
         init();
 
