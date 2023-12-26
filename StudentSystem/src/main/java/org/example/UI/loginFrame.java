@@ -152,7 +152,7 @@ public class loginFrame extends JFrame implements ActionListener {
                 }
                 if (loginSucceed){
                     this.setVisible(false);
-                    new MainJFrame(1);
+                    new MainJFrame();
                 }else {
                     showJDialog("账号或密码不正确");
                 }

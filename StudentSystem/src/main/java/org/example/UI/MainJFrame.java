@@ -1,6 +1,8 @@
 package org.example.UI;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
@@ -32,12 +34,48 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JPanel setting;
     private JComboBox themeComboBox;
     private JLabel theme;
-
-    public MainJFrame(int num){
-        init();
-    }
+    private JPanel MajorManage;
+    private JTable MajorTable;
+    private JPanel PerformanceManage;
+    private JPanel CGradeManage;
+    private JTable CGradeTable;
+    private JTable PerformanceTable;
+    private JButton MajorAddButton;
+    private JButton MajorReviseButton;
+    private JButton MajorInquireButton;
+    private JButton MajorAllButton;
+    private JButton MajorCounterButton;
+    private JButton MajorDelButton;
+    private JButton PAddButton;
+    private JButton PReviseButton;
+    private JButton PInquireButton;
+    private JButton PAllButton;
+    private JButton PCounterButton;
+    private JButton PDelButton;
+    private JButton CGAddbutton;
+    private JButton CGReviseButton;
+    private JButton CGInquireButton;
+    private JButton CGAllButton;
+    private JButton CGCounterButton;
+    private JButton CGDelButton;
+    private JButton LogOut;
 
     public MainJFrame() {
+        /*try {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        frame = new JFrame("MainJFrame");
+        frame.setPreferredSize(new Dimension(1000,800));
+        frame.setContentPane(panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        //设置窗口居中
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);*/
+
+        init();
 
         tabbedPane.addMouseListener(new MouseAdapter() {
             /**
@@ -53,81 +91,29 @@ public class MainJFrame extends JFrame implements ActionListener{
 
                 if (selectedTab.equals("学生管理")){
                     Object[] tableTitles = {"编号", "标题", "正文"};
-                    String[][] tabledatas = {
-                            {"编号1", "标题1", "正文1"},
-                            {"编号2", "标题2", "正文2"},
-                            {"编号3", "标题3", "正文3"},
-                            {"编号4", "标题4", "正文4"},
-                            {"编号5", "标题5", "正文5"},
-                            {"编号6", "标题6", "正文6"},
-                            {"编号7", "标题7", "正文7"},
-                            {"编号8", "标题8", "正文8"},
-                            {"编号9", "标题9", "正文9"},
-                            {"编号10", "标题10", "正文10"},
-                            {"编号11", "标题11", "正文11"},
-                            {"编号12", "标题12", "正文12"},
-                            {"编号13", "标题13", "正文13"},
-                            {"编号14", "标题14", "正文14"},
-                            {"编号15", "标题15", "正文15"},
-                            {"编号16", "标题16", "正文16"},
-                            {"编号17", "标题17", "正文17"},
-                            {"编号18", "标题18", "正文18"},
-                            {"编号19", "标题19", "正文19"},
-                            {"编号20", "标题20", "正文20"},
-                            {"编号21", "标题21", "正文21"},
-                            {"编号22", "标题22", "正文22"},
-                            {"编号23", "标题23", "正文23"},
-                            {"编号24", "标题24", "正文24"},
-                            {"编号25", "标题25", "正文25"},
-                            {"编号26", "标题26", "正文26"},
-                            {"编号27", "标题27", "正文27"},
-                            {"编号28", "标题28", "正文28"},
-                            {"编号29", "标题29", "正文29"},
-                    };
+                    String[][] tabledatas = {};
                     TableModel data = new DefaultTableModel(tabledatas,tableTitles);
                     StudentTable.setModel(data);
-                    StudentTable.setForeground(Color.white);
-                    StudentTable.setGridColor(Color.yellow);
-                    System.out.println("GET");
-                }else if (selectedTab.equals("设置")) {
-                    themeComboBox.addItem("Darcu");
-                    themeComboBox.addItem("Light");
                 }
             }
         });
-
-        DelButton.addActionListener(e -> {
-            int i = StudentTable.getSelectedRow();
-            System.out.println(i);
-            if (i<0){
-                showJDialog("未选择");
-            }else {
-                this.setVisible(false);
-                showChooseJDialog();
-            }
-        });
-
+        /*按钮监听*/
+        //学生信息管理页面
+        AddButton.addActionListener(this);
         DelButton.addActionListener(this);
-
-        themeComboBox.addActionListener(e -> {
-            String theme = (String) themeComboBox.getSelectedItem();
-            assert theme != null;
-            if (theme.equals("Darcu")){
-                try {
-                    UIManager.setLookAndFeel( new FlatDarculaLaf());
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-                frame.getContentPane().repaint();
-            }else if (theme.equals("Light")){
-                try {
-                    UIManager.setLookAndFeel( new FlatLightLaf());
-                } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
-                }
-            }
-            SwingUtilities.updateComponentTreeUI(frame);
-        });
+        ReviseButton.addActionListener(this);
+        InquireButton.addActionListener(this);
+        AllButton.addActionListener(this);
+        CounterButton.addActionListener(this);
+        //课程管理页面
+        ClassAddButton.addActionListener(this);
+        ClassDelButton.addActionListener(this);
+        ClassReviseButton.addActionListener(this);
+        ClassInquireButton.addActionListener(this);
+        ClassAllButton.addActionListener(this);
+        ClassCounterButton.addActionListener(this);
+        //设置页面
+        themeComboBox.addActionListener(this);
     }
 
     //只创建一个弹框对象
@@ -172,19 +158,27 @@ public class MainJFrame extends JFrame implements ActionListener{
     }
 
     public void init(){
-        try {
-            UIManager.setLookAndFeel( new FlatDarculaLaf());
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-        frame = new JFrame("MainJFrame");
+
+        frame = new JFrame("主界面");
         frame.setPreferredSize(new Dimension(1000,800));
-        frame.setContentPane(new MainJFrame().panel1);
+        frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         //设置窗口居中
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        try {
+            UIManager.setLookAndFeel( new FlatIntelliJLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        SwingUtilities.updateComponentTreeUI(frame);
+
+        themeComboBox.addItem("IntelliJ");
+        themeComboBox.addItem("Darcula");
+        themeComboBox.addItem("Light");
+        themeComboBox.addItem("Dark");
     }
 
     /**
@@ -194,6 +188,52 @@ public class MainJFrame extends JFrame implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Object object = e.getSource();
+        System.out.println(e.getSource());
+        if (object == DelButton){
+            //学生管理页面的删除按钮点击事件
+            int i = StudentTable.getSelectedRow();
+            System.out.println(i);
+            if (i<0){
+                showJDialog("未选择");
+            }else {
+                this.setVisible(false);
+                showChooseJDialog();
+            }
+        } else if (object == AddButton) {
+            //学生管理页面的添加点击事件
+            System.out.println(object);
+        } else if (object == themeComboBox) {
+            //主题选择
+            String theme = (String) themeComboBox.getSelectedItem();
+            assert theme != null;
+            if (theme.equals("Darcula")){
+                try {
+                    UIManager.setLookAndFeel( new FlatDarculaLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+                frame.getContentPane().repaint();
+            }else if (theme.equals("Light")){
+                try {
+                    UIManager.setLookAndFeel( new FlatLightLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }else if (theme.equals("Dark")){
+                try {
+                    UIManager.setLookAndFeel( new FlatDarkLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }else if (theme.equals("IntelliJ")){
+                try {
+                    UIManager.setLookAndFeel( new FlatIntelliJLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+            SwingUtilities.updateComponentTreeUI(frame);
+        }
     }
 }
