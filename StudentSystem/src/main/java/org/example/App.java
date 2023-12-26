@@ -9,6 +9,6 @@ import org.example.UI.loginFrame;
 public class App 
 {
     public static void main( String[] args ) throws Exception {
-        new LoginJFrame();
+        new loginFrame();
     }
 }

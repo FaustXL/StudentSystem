@@ -9,7 +9,7 @@ public class studentUserServerImpl implements studentUserServer {
 
     @Override
     public boolean isLoginSucceed(studentUser s) throws Exception {
-        studentUser studentUser = studentUserDao.selectByUsername(s.getUsername());
+        studentUser studentUser = studentUserDao.selectByUsername(s.getStudentId());
         return s.getPassword().equals(studentUser.getPassword());
     }
 }

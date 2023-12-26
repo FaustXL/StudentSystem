@@ -142,7 +142,7 @@ public class loginFrame extends JFrame implements ActionListener {
                 showJDialog("填写的密码或者账号不能为空");
             }else{
                 studentUser studentUser = new studentUser();
-                studentUser.setUsername(username);
+                studentUser.setStudentId(username);
                 studentUser.setPassword(password);
                 boolean loginSucceed = true;
                 try {

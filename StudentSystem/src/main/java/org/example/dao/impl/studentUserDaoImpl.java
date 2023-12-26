@@ -12,14 +12,14 @@ public class studentUserDaoImpl implements studentUserDao {
     @Override
     public studentUser selectByUsername(String username) throws Exception {
         Connection connection = jdbcConfig.getConnection();
-        String sql = "select * from student_user where student_username = ?";
+        String sql = "select * from student_user where student_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,username);
         ResultSet resultSet = preparedStatement.executeQuery();
         studentUser studentUser = new studentUser();
         while (resultSet.next()){
             studentUser.setId(resultSet.getInt("user_id"));
-            studentUser.setUsername(resultSet.getString("student_username"));
+            studentUser.setStudentId(resultSet.getString("student_id"));
             studentUser.setPassword(resultSet.getString("student_password"));
         }
         System.out.println(studentUser);
