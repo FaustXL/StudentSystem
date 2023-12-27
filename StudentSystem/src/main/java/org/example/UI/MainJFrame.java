@@ -4,6 +4,8 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.example.server.impl.lessonServerImpl;
+import org.example.server.impl.studentServerImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -60,31 +62,51 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JButton CGDelButton;
     private JButton LogOut;
 
-    public MainJFrame() {
+    //存放数据二维数组
+    private String[][] tabledatas = null;
+
+    //学生表业务
+    private studentServerImpl studentServer = new studentServerImpl();
+
+    //课程表业务
+    private lessonServerImpl lessonServer = new lessonServerImpl();
 
 
+    public MainJFrame(){
+
+        //主界面
         init();
+        //查询所有学生
+        getAllStudent();
 
+        //添加标题点击时间
         tabbedPane.addMouseListener(new MouseAdapter() {
-            /**
-             * {@inheritDoc}
-             *
-             * @param e
-             */
+
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 int selectedIndex = tabbedPane.getSelectedIndex();
                 String selectedTab = tabbedPane.getTitleAt(selectedIndex);
                 System.out.println("Clicked: " + selectedTab);
 
                 if (selectedTab.equals("学生管理")){
-                    Object[] tableTitles = {"编号", "标题", "正文"};
-                    String[][] tabledatas = {};
-                    TableModel data = new DefaultTableModel(tabledatas,tableTitles);
-                    StudentTable.setModel(data);
+                    getAllStudent();
+                }else if(selectedTab.equals("课程管理")){
+
+                    //点击课程管理标题查询所有课程
+                    String[] tableTitles = {"课程号","课程名称","学时","学分"};
+                    try {
+                        tabledatas = lessonServer.getsLessonAll(tabledatas);
+                        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+                        ClassTable.setModel(data);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                 }
             }
         });
+
+
         /*按钮监听*/
         //学生信息管理页面
         AddButton.addActionListener(this);
@@ -93,6 +115,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         InquireButton.addActionListener(this);
         AllButton.addActionListener(this);
         CounterButton.addActionListener(this);
+
         //课程管理页面
         ClassAddButton.addActionListener(this);
         ClassDelButton.addActionListener(this);
@@ -100,12 +123,27 @@ public class MainJFrame extends JFrame implements ActionListener{
         ClassInquireButton.addActionListener(this);
         ClassAllButton.addActionListener(this);
         ClassCounterButton.addActionListener(this);
+
         //设置页面
         themeComboBox.addActionListener(this);
     }
 
+    public void getAllStudent(){
+        Object[] tableTitles = {"学号", "姓名", "性别", "年龄", "身份证号", "所属院系", "班级", "专业名"
+                , "地址", "电话号码"};
+        try {
+            tabledatas = studentServer.getStudentAll(tabledatas);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+        StudentTable.setModel(data);
+    }
+
     //只创建一个弹框对象
     JDialog jDialog = new JDialog();
+
+
     //因为展示弹框的代码，会被运行多次
     //所以，我们把展示弹框的代码，抽取到一个方法中。以后用到的时候，就不需要写了
     //直接调用就可以了。
@@ -154,7 +192,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         }
 
         frame = new JFrame("主界面");
-        frame.setPreferredSize(new Dimension(1000,800));
+        frame.setPreferredSize(new Dimension(1500,800));
         frame.setContentPane(panel1);
         SwingUtilities.updateComponentTreeUI(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,11 +207,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         themeComboBox.addItem("Dark");
     }
 
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();

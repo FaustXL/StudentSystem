@@ -1,5 +1,6 @@
 package org.example.UI;
 
+import lombok.SneakyThrows;
 import org.example.domain.studentUser;
 import org.example.server.impl.studentUserServerImpl;
 
@@ -121,6 +122,7 @@ public class loginFrame extends JFrame implements ActionListener {
         this.setJMenuBar(jMenuBar);
     }
 
+    @SneakyThrows
     @Override
     public void actionPerformed(ActionEvent e) {
 
