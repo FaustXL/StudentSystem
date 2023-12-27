@@ -16,13 +16,16 @@ public class SMain {
     private JLabel Ssex;
     private JLabel Smajor;
     private JLabel SclassAndGrade;
-    private JLabel Sschool;
+    private JLabel Saffiliation;
     private JTable ClassTable;
     private JTable AllClassTable;
     private JTable HomeWorkTable;
     private JLabel theme;
     private JComboBox themeComboBox;
     private JButton LogOut;
+    private JLabel Sadress;
+    private JLabel Stel;
+    private JLabel SID;
 
     public SMain(){
         try {
