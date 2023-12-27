@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -40,29 +41,14 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JLabel theme;
     private JPanel MajorManage;
     private JTable MajorTable;
-    private JPanel PerformanceManage;
-    private JPanel CGradeManage;
-    private JTable CGradeTable;
-    private JTable PerformanceTable;
     private JButton MajorAddButton;
     private JButton MajorReviseButton;
     private JButton MajorInquireButton;
     private JButton MajorAllButton;
     private JButton MajorCounterButton;
     private JButton MajorDelButton;
-    private JButton PAddButton;
-    private JButton PReviseButton;
-    private JButton PInquireButton;
-    private JButton PAllButton;
-    private JButton PCounterButton;
-    private JButton PDelButton;
-    private JButton CGAddbutton;
-    private JButton CGReviseButton;
-    private JButton CGInquireButton;
-    private JButton CGAllButton;
-    private JButton CGCounterButton;
-    private JButton CGDelButton;
     private JButton LogOut;
+    private JList list1;
 
     //存放数据二维数组
     private String[][] tabledatas = null;
@@ -100,10 +86,15 @@ public class MainJFrame extends JFrame implements ActionListener{
                     try {
                         tabledatas = lessonServer.getsLessonAll(tabledatas);
                         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+                        //文本居中
+                        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
+                        dc.setHorizontalAlignment(JLabel.CENTER);
+                        ClassTable.setDefaultRenderer(Object.class, dc);
                         ClassTable.setModel(data);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+                    ClassTable.setRowHeight(25);
                 }
             }
         });
@@ -126,8 +117,18 @@ public class MainJFrame extends JFrame implements ActionListener{
         ClassAllButton.addActionListener(this);
         ClassCounterButton.addActionListener(this);
 
+        //专业管理页面
+        MajorAddButton.addActionListener(this);
+        MajorDelButton.addActionListener(this);
+        MajorReviseButton.addActionListener(this);
+        MajorInquireButton.addActionListener(this);
+        MajorAllButton.addActionListener(this);
+        MajorCounterButton.addActionListener(this);
+
+
         //设置页面
         themeComboBox.addActionListener(this);
+        LogOut.addActionListener(this);
     }
 
     public void getAllStudent(){
@@ -163,6 +164,9 @@ public class MainJFrame extends JFrame implements ActionListener{
         column.setPreferredWidth(50);
         column.setMaxWidth(80);
         column = StudentTable.getColumnModel().getColumn(6);
+        column.setPreferredWidth(100);
+        column.setMaxWidth(200);
+        column = StudentTable.getColumnModel().getColumn(7);
         column.setPreferredWidth(100);
         column.setMaxWidth(200);
     }
@@ -254,6 +258,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == AddButton) {
             //学生管理页面的添加点击事件
             System.out.println(object);
+            new SAddJFrame();
         } else if (object == themeComboBox) {
             //主题选择
             String theme = (String) themeComboBox.getSelectedItem();
@@ -285,6 +290,12 @@ public class MainJFrame extends JFrame implements ActionListener{
                 }
             }
             SwingUtilities.updateComponentTreeUI(frame);
+        } else if (object == LogOut) {
+            frame.setVisible(false);
+            new loginFrame();
+        } else if (object == ReviseButton) {
+            //点击了学生管理-修改
+            System.out.println(StudentTable.getSelectedRow());
         }
     }
 }

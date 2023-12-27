@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.UI.Teacher.Student.SAddJFrame">
-  <grid id="27dc6" binding="SAdd" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.UI.Teacher.Student.SInquire">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="500"/>
+      <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties>
       <minimumSize width="500" height="400"/>
     </properties>
     <border type="none"/>
     <children>
-      <scrollpane id="65654">
+      <scrollpane id="70d30">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="e8bef" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="9efae" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="5" left="5" bottom="5" right="5"/>
             <constraints/>
             <properties>
@@ -26,7 +26,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="3dc2d" class="javax.swing.JLabel">
+              <component id="ce780" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -34,7 +34,7 @@
                   <text value="姓名"/>
                 </properties>
               </component>
-              <component id="bb1cc" class="javax.swing.JTextField" binding="Name">
+              <component id="78cc5" class="javax.swing.JTextField" binding="Name">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -42,7 +42,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="aa5e9" class="javax.swing.JLabel">
+              <component id="b320b" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -50,13 +50,13 @@
                   <text value="年龄"/>
                 </properties>
               </component>
-              <component id="75e5a" class="javax.swing.JComboBox" binding="AgeComboBox">
+              <component id="ece18" class="javax.swing.JComboBox" binding="AgeComboBox">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="7e997" class="javax.swing.JLabel">
+              <component id="382c3" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -64,13 +64,13 @@
                   <text value="性别"/>
                 </properties>
               </component>
-              <component id="eec1c" class="javax.swing.JComboBox" binding="SexComboBox">
+              <component id="a2503" class="javax.swing.JComboBox" binding="SexComboBox">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="f3290" class="javax.swing.JLabel">
+              <component id="d1808" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -78,7 +78,7 @@
                   <text value="身份证号"/>
                 </properties>
               </component>
-              <component id="4bf47" class="javax.swing.JTextField" binding="IDCard">
+              <component id="348ee" class="javax.swing.JTextField" binding="IDCard">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -86,15 +86,15 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="f5249" class="javax.swing.JButton" binding="PushButton">
+              <component id="be79f" class="javax.swing.JButton" binding="PushButton">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="提交"/>
+                  <text value="查询"/>
                 </properties>
               </component>
-              <component id="afe43" class="javax.swing.JLabel">
+              <component id="c1963" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -102,7 +102,7 @@
                   <text value="联系电话"/>
                 </properties>
               </component>
-              <component id="a7f06" class="javax.swing.JTextField" binding="Phone">
+              <component id="cb819" class="javax.swing.JTextField" binding="Phone">
                 <constraints>
                   <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -110,7 +110,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="b7c7f" class="javax.swing.JLabel">
+              <component id="f021b" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -118,13 +118,13 @@
                   <text value="所属院系"/>
                 </properties>
               </component>
-              <component id="dc5b9" class="javax.swing.JComboBox" binding="AcademyComboBox">
+              <component id="1e11b" class="javax.swing.JComboBox" binding="AcademyComboBox">
                 <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
-              <component id="114d7" class="javax.swing.JButton" binding="ResetButton">
+              <component id="e054f" class="javax.swing.JButton" binding="ResetButton">
                 <constraints>
                   <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -132,7 +132,7 @@
                   <text value="重置"/>
                 </properties>
               </component>
-              <component id="3bcad" class="javax.swing.JLabel">
+              <component id="30713" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -140,7 +140,7 @@
                   <text value="班级"/>
                 </properties>
               </component>
-              <component id="ce1d9" class="javax.swing.JTextField" binding="ClassTextField">
+              <component id="a7f97" class="javax.swing.JTextField" binding="ClassTextField">
                 <constraints>
                   <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -148,7 +148,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="bd1bb" class="javax.swing.JLabel">
+              <component id="9bd3a" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -156,7 +156,7 @@
                   <text value="专业"/>
                 </properties>
               </component>
-              <component id="a0095" class="javax.swing.JLabel">
+              <component id="c4f8c" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -164,7 +164,7 @@
                   <text value="联系地址"/>
                 </properties>
               </component>
-              <component id="d56c0" class="javax.swing.JTextField" binding="Address">
+              <component id="5118e" class="javax.swing.JTextField" binding="Address">
                 <constraints>
                   <grid row="4" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -172,7 +172,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="99150" class="javax.swing.JTextField" binding="MajorTextField">
+              <component id="f8ea1" class="javax.swing.JTextField" binding="MajorTextField">
                 <constraints>
                   <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
