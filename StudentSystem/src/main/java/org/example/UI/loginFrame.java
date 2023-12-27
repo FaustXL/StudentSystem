@@ -2,7 +2,9 @@ package org.example.UI;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import lombok.SneakyThrows;
+import org.example.domain.administrator;
 import org.example.domain.studentUser;
+import org.example.server.impl.administratorServerImpl;
 import org.example.server.impl.studentUserServerImpl;
 
 import javax.swing.*;
@@ -21,7 +23,6 @@ public class loginFrame extends JFrame implements ActionListener {
     private JPasswordField passwordText = null;
     private JTextField usernameText = null;
 
-    private studentUserServerImpl studentUserServer = new studentUserServerImpl();
     public loginFrame(){
         createInterface();
         setInterface();
@@ -161,24 +162,40 @@ public class loginFrame extends JFrame implements ActionListener {
         }else if (e.getActionCommand().equals("登录")){
             String username = usernameText.getText();
             String password = passwordText.getText();
-            if (username.equals("") || password.equals("")){
-                showJDialog("填写的密码或者账号不能为空");
-            }else{
-                studentUser studentUser = new studentUser();
-                studentUser.setStudentId(username);
-                studentUser.setPassword(password);
-                boolean loginSucceed = true;
-                try {
-                    loginSucceed = studentUserServer.isLoginSucceed(studentUser);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
+            if (usernameStr.equals("学生账号")){
+                if (username.equals("") || password.equals("")){
+                    showJDialog("填写的密码或者账号不能为空");
+                }else{
+                    studentUser studentUser = new studentUser();
+                    studentUserServerImpl studentUserServer = new studentUserServerImpl();
+                    studentUser.setStudentId(username);
+                    studentUser.setPassword(password);
+                    boolean loginSucceed = studentUserServer.isLoginSucceed(studentUser);
+                    if (loginSucceed){
+                        this.setVisible(false);
+                        new SMain();
+                    }else {
+                        showJDialog("账号或密码不正确");
+                    }
                 }
-                if (loginSucceed){
-                    this.setVisible(false);
-                    new MainJFrame();
+            }else if (usernameStr.equals("教师账号")){
+                administratorServerImpl administratorServer = new administratorServerImpl();
+
+                if (username.equals("") || password.equals("")){
+                    showJDialog("填写的密码或者账号不能为空");
                 }else {
-                    showJDialog("账号或密码不正确");
+                    administrator administrator = new administrator();
+                    administrator.setAdministratorUsername(username);
+                    administrator.setAdministratorPassword(password);
+                    boolean b = administratorServer.adminLogin(administrator);
+                    if (b){
+                        this.setVisible(false);
+                        new MainJFrame();
+                    }else {
+                        showJDialog("账号或密码不正确");
+                    }
                 }
+
             }
         }
     }
