@@ -35,6 +35,29 @@ public class studentDaoImpl implements studentDao {
     }
 
     @Override
+    public student selectStudentById(String id) throws Exception {
+        Connection connection = jdbcConfig.getConnection();
+        String sql = "select * from student where student_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        student s = new student();
+        while (resultSet.next()) {
+            s.setStudentId(resultSet.getString("student_id"));
+            s.setStudentName(resultSet.getString("student_name"));
+            s.setStudentGender(resultSet.getString("student_gender"));
+            s.setStudentAge(resultSet.getInt("student_age"));
+            s.setIdCardNumber(resultSet.getString("id_card_number"));
+            s.setAffiliation(resultSet.getString("affiliation"));
+            s.setClasses(resultSet.getString("class"));
+            s.setProfessionalName(resultSet.getString("professional_name"));
+            s.setStudentAddress(resultSet.getString("student_address"));
+            s.setStudentTel(resultSet.getString("student_tel"));
+        }
+        return s;
+    }
+
+    @Override
     public int insertStudent(student s) throws Exception {
         Connection connection = jdbcConfig.getConnection();
         PreparedStatement prep = connection.prepareStatement("INSERT INTO `student` (`student_id`, `student_name`," +

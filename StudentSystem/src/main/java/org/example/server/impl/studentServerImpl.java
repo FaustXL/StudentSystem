@@ -33,6 +33,12 @@ public class studentServerImpl implements studentServer {
     }
 
     @Override
+    public student getStudentById(String id) throws Exception {
+        student student = studentDao.selectStudentById(id);
+        return null;
+    }
+
+    @Override
     public boolean insertStudent(student s) throws Exception {
         int i1 = Integer.parseInt(util.createStudentId(s.getClasses()));
         s.setStudentId(String.valueOf(i1 + 1));

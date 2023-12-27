@@ -173,7 +173,7 @@ public class loginFrame extends JFrame implements ActionListener {
                     boolean loginSucceed = studentUserServer.isLoginSucceed(studentUser);
                     if (loginSucceed){
                         this.setVisible(false);
-                        new SMain();
+                        new SMain(studentUser.getStudentId());
                     }else {
                         showJDialog("账号或密码不正确");
                     }
