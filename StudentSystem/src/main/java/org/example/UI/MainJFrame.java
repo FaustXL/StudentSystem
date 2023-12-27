@@ -8,7 +8,9 @@ import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
@@ -79,7 +81,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         //查询所有学生
         getAllStudent();
 
-        //添加标题点击时间
+        //标题点击事件
         tabbedPane.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -137,7 +139,32 @@ public class MainJFrame extends JFrame implements ActionListener{
             exception.printStackTrace();
         }
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+
+        //文本居中
+        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
+        dc.setHorizontalAlignment(JLabel.CENTER);
+        StudentTable.setDefaultRenderer(Object.class, dc);
+
         StudentTable.setModel(data);
+
+        //设置行高
+        StudentTable.setRowHeight(25);
+
+        StudentTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);// 以下设置表格列宽
+        TableColumn column = StudentTable.getColumnModel().getColumn(0);
+        column.setPreferredWidth(80);
+        column.setMaxWidth(100);
+        column = StudentTable.getColumnModel().getColumn(1);
+        column.setPreferredWidth(10);
+        column = StudentTable.getColumnModel().getColumn(2);
+        column.setPreferredWidth(50);
+        column.setMaxWidth(80);
+        column = StudentTable.getColumnModel().getColumn(3);
+        column.setPreferredWidth(50);
+        column.setMaxWidth(80);
+        column = StudentTable.getColumnModel().getColumn(6);
+        column.setPreferredWidth(100);
+        column.setMaxWidth(200);
     }
 
     //只创建一个弹框对象
@@ -205,6 +232,8 @@ public class MainJFrame extends JFrame implements ActionListener{
         themeComboBox.addItem("Darcula");
         themeComboBox.addItem("Light");
         themeComboBox.addItem("Dark");
+
+        getAllStudent();
     }
 
 

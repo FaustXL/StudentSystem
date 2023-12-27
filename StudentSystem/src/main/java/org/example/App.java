@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.UI.MainJFrame;
 import org.example.UI.loginFrame;
 
 
@@ -7,6 +8,6 @@ import org.example.UI.loginFrame;
 public class App 
 {
     public static void main( String[] args ) throws Exception {
-        new loginFrame();
+        new MainJFrame();
     }
 }

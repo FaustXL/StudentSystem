@@ -72,38 +72,6 @@
                           <text value="NULL"/>
                         </properties>
                       </component>
-                      <component id="6d91a" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="专业 : "/>
-                        </properties>
-                      </component>
-                      <component id="4792" class="javax.swing.JLabel" binding="Smajor">
-                        <constraints>
-                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="NULL"/>
-                        </properties>
-                      </component>
-                      <component id="28c49" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="班级 : "/>
-                        </properties>
-                      </component>
-                      <component id="1e2ef" class="javax.swing.JLabel" binding="SclassAndGrade">
-                        <constraints>
-                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="NULL"/>
-                        </properties>
-                      </component>
                       <component id="ce964" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -117,10 +85,10 @@
                           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value="学校 : "/>
+                          <text value="学院 : "/>
                         </properties>
                       </component>
-                      <component id="24b2b" class="javax.swing.JLabel" binding="Sschool">
+                      <component id="24b2b" class="javax.swing.JLabel" binding="Saffiliation">
                         <constraints>
                           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -130,10 +98,10 @@
                       </component>
                       <component id="a6ff0" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value=""/>
+                          <text value="联系电话 : "/>
                         </properties>
                       </component>
                       <component id="2e88b" class="javax.swing.JLabel">
@@ -142,6 +110,78 @@
                         </constraints>
                         <properties>
                           <text value=""/>
+                        </properties>
+                      </component>
+                      <component id="861aa" class="javax.swing.JLabel" binding="Stel">
+                        <constraints>
+                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="NULL"/>
+                        </properties>
+                      </component>
+                      <component id="71e78" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="联系地址 : "/>
+                        </properties>
+                      </component>
+                      <component id="63be8" class="javax.swing.JLabel" binding="Sadress">
+                        <constraints>
+                          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="NULL"/>
+                        </properties>
+                      </component>
+                      <component id="28c49" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="班级 : "/>
+                        </properties>
+                      </component>
+                      <component id="1e2ef" class="javax.swing.JLabel" binding="SclassAndGrade">
+                        <constraints>
+                          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="NULL"/>
+                        </properties>
+                      </component>
+                      <component id="4792" class="javax.swing.JLabel" binding="Smajor">
+                        <constraints>
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="NULL"/>
+                        </properties>
+                      </component>
+                      <component id="6d91a" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="专业 : "/>
+                        </properties>
+                      </component>
+                      <component id="88f42" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="学号 : "/>
+                        </properties>
+                      </component>
+                      <component id="7407e" class="javax.swing.JLabel" binding="SID">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="NULL"/>
                         </properties>
                       </component>
                     </children>
