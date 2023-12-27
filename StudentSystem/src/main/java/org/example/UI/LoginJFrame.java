@@ -23,6 +23,7 @@ public class LoginJFrame {
     }
 
     public void init(){
+        System.out.println("666");
         textField1.setBorder(new MatteBorder(0,0,1,0,Color.BLACK));
         passwordField1.setBorder(new MatteBorder(0,0,1,0,Color.BLACK));
     }
