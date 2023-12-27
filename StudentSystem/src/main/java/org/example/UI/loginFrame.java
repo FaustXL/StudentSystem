@@ -1,10 +1,12 @@
 package org.example.UI;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import lombok.SneakyThrows;
 import org.example.domain.studentUser;
 import org.example.server.impl.studentUserServerImpl;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,12 @@ public class loginFrame extends JFrame implements ActionListener {
     }
 
     public void createInterface(){
+        /*try {
+            UIManager.setLookAndFeel( new FlatIntelliJLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }*/
+
         this.setSize(800,550);
         //设置界面置顶
         this.setAlwaysOnTop(true);
@@ -45,7 +53,8 @@ public class loginFrame extends JFrame implements ActionListener {
 
         //admin图片
         JLabel admin = new JLabel(new ImageIcon("image\\login\\admin.png"));
-        admin.setBounds(300,30,180,180);
+//        JLabel admin = new JLabel(new ImageIcon("image\\login\\admin2.png"));
+        admin.setBounds(300,30,160,160);
         CONTAINER.add(admin);
 
         //设置字体
@@ -62,6 +71,8 @@ public class loginFrame extends JFrame implements ActionListener {
         usernameText = new JTextField();
         usernameText.setBounds(280,245,280,30);
         usernameText.setFont(new Font("微软雅黑",Font.PLAIN,15));
+        usernameText.setOpaque(false);
+        usernameText.setBorder(new MatteBorder(0,0,1,0,Color.WHITE));
         CONTAINER.add(usernameText);
 
         //密码文字
@@ -76,6 +87,8 @@ public class loginFrame extends JFrame implements ActionListener {
         passwordText.setBounds(280,315,280,30);
         passwordText.setFont(new Font("微软雅黑",Font.BOLD,20));
         passwordText.setEchoChar('·');
+        passwordText.setOpaque(false);
+        passwordText.setBorder(new MatteBorder(0,0,1,0,Color.WHITE));
         CONTAINER.add(passwordText);
 
         //登录注册按钮字体
@@ -85,6 +98,10 @@ public class loginFrame extends JFrame implements ActionListener {
         JButton loginButton = new JButton("登录");
         loginButton.setBounds(235,400,150,40);
         loginButton.setFont(loginFont);
+        loginButton.setBorderPainted(false);
+        loginButton.setBackground(new Color(64,158,255));
+        loginButton.setForeground(Color.white);
+        loginButton.setFont(new Font("黑体",Font.BOLD,15));
         CONTAINER.add(loginButton);
 
         loginButton.addActionListener(this);
@@ -93,10 +110,14 @@ public class loginFrame extends JFrame implements ActionListener {
         JButton registeredButton = new JButton("注册");
         registeredButton.setBounds(410,400,150,40);
         registeredButton.setFont(loginFont);
+        registeredButton.setBorderPainted(false);
+        registeredButton.setBackground(Color.white);
+        registeredButton.setForeground(Color.BLACK);
+        registeredButton.setFont(new Font("黑体",Font.BOLD,15));
         CONTAINER.add(registeredButton);
 
         //插入登录主界面
-        JLabel jLogin = new JLabel(new ImageIcon("image\\login\\loginbackground.jpg"));
+        JLabel jLogin = new JLabel(new ImageIcon("image\\login\\loginbackground2.jpg"));
         jLogin.setBounds(2,1,800,500);
         this.getContentPane().add(jLogin);
 
