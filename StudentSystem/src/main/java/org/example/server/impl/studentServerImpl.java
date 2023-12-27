@@ -3,7 +3,9 @@ package org.example.server.impl;
 import org.example.dao.impl.studentDaoImpl;
 import org.example.domain.student;
 import org.example.server.studentServer;
+import org.example.utils.util;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class studentServerImpl implements studentServer {
@@ -28,5 +30,18 @@ public class studentServerImpl implements studentServer {
                 tableData[i][9] = student.getStudentTel();
             }
         return tableData;
+    }
+
+    @Override
+    public boolean insertStudent(student s) throws Exception {
+        int i1 = Integer.parseInt(util.createStudentId(s.getClasses()));
+        s.setStudentId(String.valueOf(i1 + 1));
+        int i = 0;
+        try {
+            i = studentDao.insertStudent(s);
+        } catch (SQLIntegrityConstraintViolationException exception) {
+            System.out.println("服务器繁忙,请稍后再进行插入学生操作");
+        }
+        return i > 0;
     }
 }

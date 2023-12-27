@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface studentServer {
     String[][] getStudentAll(String[][] tableData) throws Exception;
+    boolean insertStudent(student s) throws Exception;
 }

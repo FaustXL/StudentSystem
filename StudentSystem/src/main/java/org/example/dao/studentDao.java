@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface studentDao {
     List<student> selectStudentAll() throws Exception;
+    int insertStudent(student s) throws Exception;
 }

@@ -33,4 +33,24 @@ public class studentDaoImpl implements studentDao {
         }
         return studentList;
     }
+
+    @Override
+    public int insertStudent(student s) throws Exception {
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement prep = connection.prepareStatement("INSERT INTO `student` (`student_id`, `student_name`," +
+                " `student_gender`, `student_age`, `id_card_number`, `affiliation`, `class`, `professional_name`, " +
+                "`student_address`,`student_tel`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        prep.setString(1,s.getStudentId());
+        prep.setString(2,s.getStudentName());
+        prep.setString(3,s.getStudentGender());
+        prep.setInt(4,s.getStudentAge());
+        prep.setString(5,s.getIdCardNumber());
+        prep.setString(6,s.getAffiliation());
+        prep.setString(7,s.getClasses());
+        prep.setString(8,s.getProfessionalName());
+        prep.setString(9,s.getStudentAddress());
+        prep.setString(10,s.getStudentTel());
+
+        return prep.executeUpdate();
+    }
 }
