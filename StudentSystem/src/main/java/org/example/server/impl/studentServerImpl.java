@@ -35,7 +35,7 @@ public class studentServerImpl implements studentServer {
     @Override
     public student getStudentById(String id) throws Exception {
         student student = studentDao.selectStudentById(id);
-        return null;
+        return student;
     }
 
     @Override

@@ -76,4 +76,23 @@ public class studentDaoImpl implements studentDao {
 
         return prep.executeUpdate();
     }
+
+    @Override
+    public List<student> selectAffiliationAndProfessionalName() throws Exception {
+        String sql = "SELECT affiliation, professional_name FROM student\n" +
+                "GROUP BY affiliation, professional_name;";
+        Connection connection = jdbcConfig.getConnection();
+        List<student> list = new ArrayList<>();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            student student = new student();
+            student.setAffiliation(resultSet.getString("affiliation"));
+            student.setProfessionalName(resultSet.getString("professional_name"));
+            list.add(student);
+        }
+        return list;
+    }
+
+
 }
