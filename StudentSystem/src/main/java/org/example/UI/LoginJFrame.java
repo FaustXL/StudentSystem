@@ -26,6 +26,6 @@ public class LoginJFrame {
         System.out.println("666");
         textField1.setBorder(new MatteBorder(0,0,1,0,Color.BLACK));
         passwordField1.setBorder(new MatteBorder(0,0,1,0,Color.BLACK));
-        passwordField1.setOpaque(false);
+        System.out.println("555");
     }
 }
