@@ -79,7 +79,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         //查询所有学生
         getAllStudent();
 
-        //添加标题点击时间
+        //标题点击事件
         tabbedPane.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -205,6 +205,8 @@ public class MainJFrame extends JFrame implements ActionListener{
         themeComboBox.addItem("Darcula");
         themeComboBox.addItem("Light");
         themeComboBox.addItem("Dark");
+
+        getAllStudent();
     }
 
 
