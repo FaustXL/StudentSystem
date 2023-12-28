@@ -116,7 +116,7 @@
                     </constraints>
                     <properties>
                       <font name="JetBrains Mono"/>
-                      <text value="反选"/>
+                      <text value="清空选择"/>
                       <toolTipText value="点击反选所有条目"/>
                     </properties>
                   </component>
@@ -216,7 +216,7 @@
                     </constraints>
                     <properties>
                       <font name="JetBrains Mono"/>
-                      <text value="反选"/>
+                      <text value="清空选择"/>
                     </properties>
                   </component>
                   <component id="4698d" class="javax.swing.JButton" binding="ClassDelButton">
@@ -435,7 +435,7 @@
                     </constraints>
                     <properties>
                       <font name="JetBrains Mono"/>
-                      <text value="反选"/>
+                      <text value="清空选择"/>
                     </properties>
                   </component>
                   <component id="a7aa4" class="javax.swing.JButton" binding="MajorDelButton">
