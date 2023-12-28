@@ -1,6 +1,8 @@
 package org.example.UI;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import org.example.domain.student;
+import org.example.server.impl.studentServerImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +27,11 @@ public class SMain {
     private JLabel theme;
     private JComboBox themeComboBox;
     private JButton LogOut;
-    private JLabel Sadress;
+    private JLabel Saddress;
     private JLabel Stel;
     private JLabel SID;
+
+    private studentServerImpl studentServer = new studentServerImpl();
 
     public SMain(String id){
         this.id = id;
@@ -45,13 +49,27 @@ public class SMain {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        try {
+            getData(this.id);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
         frame.setVisible(true);
     }
 
     public SMain() {
     }
 
-    public void getData(){
-
+    //给元素赋值上学生的信息
+    public void getData(String id) throws Exception {
+        student studentById = studentServer.getStudentById(id);
+        Sname.setText(studentById.getStudentName());
+        Ssex.setText(studentById.getStudentGender());
+        Smajor.setText(studentById.getProfessionalName());
+        SclassAndGrade.setText(studentById.getClasses());
+        Saffiliation.setText(studentById.getAffiliation());
+        Saddress.setText(studentById.getStudentAddress());
+        Stel.setText(studentById.getStudentTel());
+        SID.setText(studentById.getStudentId());
     }
 }
