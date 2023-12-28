@@ -59,13 +59,12 @@ public class SMain {
         }
         frame.setVisible(true);
 
-        Object[] tableTitles = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
-        String[][] tabledatas = null;
+        String[] tableTitles = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
+        String[][] tabledatas = new String[10][7];
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
         DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
         dc.setHorizontalAlignment(JLabel.CENTER);
-        ClassTable.setDefaultRenderer(Object.class, dc);
-
+        ClassTable.setDefaultRenderer(String.class, dc);
         ClassTable.setModel(data);
     }
 

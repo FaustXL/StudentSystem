@@ -75,12 +75,12 @@ public class studentServerImpl implements studentServer {
     }
 
     @Override
-    public List<student> getAffiliationAndAffiliation() throws Exception {
+    public List<student> getAffiliationAndProfessionalName() throws Exception {
         return studentDao.selectAffiliationAndAffiliation();
     }
 
     @Override
-    public String[][] dealWithAffiliationAndAffiliation(String[][] tableData) throws Exception {
+    public String[][] dealWithAffiliationAndProfessionalName(String[][] tableData) throws Exception {
         List<student> studentList = studentDao.selectAffiliationAndAffiliation();
         tableData = new String[studentList.size()][2];
         for (int i = 0; i < tableData.length; i++) {

@@ -113,7 +113,7 @@ public class MainJFrame extends JFrame implements ActionListener{
                     String[] tableTitles = {"专业所属院校","专业名称"};
                     try {
                         tableDataOfProfessional_name =
-                                studentServer.dealWithAffiliationAndAffiliation(tableDataOfProfessional_name);
+                                studentServer.dealWithAffiliationAndProfessionalName(tableDataOfProfessional_name);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
