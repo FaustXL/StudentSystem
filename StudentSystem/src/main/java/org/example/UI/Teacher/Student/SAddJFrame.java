@@ -127,6 +127,7 @@ public class SAddJFrame{
             //创建Jlabel对象管理文字并添加到弹框当中
             JLabel warning = new JLabel(content);
             warning.setBounds(0, 0, 200, 150);
+            warning.setHorizontalAlignment(SwingConstants.CENTER);
             jDialog.getContentPane().add(warning);
 
             //让弹框展示出来

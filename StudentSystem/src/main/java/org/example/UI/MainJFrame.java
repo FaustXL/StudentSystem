@@ -336,6 +336,18 @@ public class MainJFrame extends JFrame implements ActionListener{
                 this.setVisible(false);
                 showChooseJDialog();
             }
+        } else if (object == AllButton) {
+            StudentTable.selectAll();
+        } else if (object == CounterButton) {
+            StudentTable.clearSelection();
+        } else if (object == ClassAllButton){
+            ClassTable.selectAll();
+        } else if (object == ClassCounterButton) {
+            ClassTable.clearSelection();
+        } else if (object == MajorAllButton) {
+            MajorTable.selectAll();
+        } else if (object == MajorCounterButton){
+            MajorTable.clearSelection();
         }
     }
 }
