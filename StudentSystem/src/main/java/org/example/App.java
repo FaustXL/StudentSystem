@@ -4,6 +4,7 @@ import org.example.UI.MainJFrame;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.UI.SMain;
 import org.example.UI.loginFrame;
+import org.example.UI.registeredFrame;
 import org.example.dao.impl.studentDaoImpl;
 import org.example.domain.student;
 

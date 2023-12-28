@@ -245,6 +245,10 @@ public class MainJFrame extends JFrame implements ActionListener{
         return JOptionPane.showConfirmDialog(this, "是否删除选中数据？","删除信息确认",JOptionPane.YES_NO_OPTION);
     }
 
+    public int showLoginOutJDialog() {
+        return JOptionPane.showConfirmDialog(this, "是否退出登录？","退出登录确认",JOptionPane.YES_NO_OPTION);
+    }
+
     public void init(){
 
         try {
@@ -331,8 +335,12 @@ public class MainJFrame extends JFrame implements ActionListener{
 
         } else if (object == LogOut) {
 
-            frame.setVisible(false);
-            new loginFrame();
+            this.setVisible(false);
+            int n = showLoginOutJDialog();
+            if (n == 0){
+                frame.setVisible(false);
+                new loginFrame();
+            }
 
         } else if (object == ReviseButton) {
 

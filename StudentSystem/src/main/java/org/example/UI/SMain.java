@@ -1,6 +1,9 @@
 package org.example.UI;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import org.example.domain.student;
 import org.example.server.impl.studentServerImpl;
 
@@ -9,8 +12,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SMain {
+public class SMain extends JFrame implements ActionListener {
+    private static JFrame frame;
     private String id;
 
     private JPanel SMain;
@@ -44,7 +50,7 @@ public class SMain {
             System.err.println( "Failed to initialize LaF" );
         }
 
-        JFrame frame = new JFrame("SMain");
+        frame = new JFrame("SMain");
         frame.setPreferredSize(new Dimension(1000,800));
         frame.setContentPane(SMain);
         SwingUtilities.updateComponentTreeUI(frame);
@@ -66,6 +72,15 @@ public class SMain {
         ClassTable.setDefaultRenderer(Object.class, dc);
 
         ClassTable.setModel(data);
+
+        LogOut.addActionListener(this);
+
+        themeComboBox.addItem("IntelliJ");
+        themeComboBox.addItem("Darcula");
+        themeComboBox.addItem("Light");
+        themeComboBox.addItem("Dark");
+
+        themeComboBox.addActionListener(this);
     }
 
     public SMain() {
@@ -82,5 +97,55 @@ public class SMain {
         Saddress.setText(studentById.getStudentAddress());
         Stel.setText(studentById.getStudentTel());
         SID.setText(studentById.getStudentId());
+    }
+
+    public int showLoginOutJDialog() {
+        return JOptionPane.showConfirmDialog(this, "是否退出登录？","退出登录确认",JOptionPane.YES_NO_OPTION);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object object = e.getSource();
+        if (object == LogOut){
+            this.setVisible(false);
+            int n = showLoginOutJDialog();
+            if (n == 0){
+                frame.setVisible(false);
+                new loginFrame();
+            }
+        } else if (object == themeComboBox) {
+
+            //主题选择
+            String theme = (String) themeComboBox.getSelectedItem();
+            assert theme != null;
+            if (theme.equals("Darcula")){
+                try {
+                    UIManager.setLookAndFeel( new FlatDarculaLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+                frame.getContentPane().repaint();
+            }else if (theme.equals("Light")){
+                try {
+                    UIManager.setLookAndFeel( new FlatLightLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }else if (theme.equals("Dark")){
+                try {
+                    UIManager.setLookAndFeel( new FlatDarkLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }else if (theme.equals("IntelliJ")){
+                try {
+                    UIManager.setLookAndFeel( new FlatIntelliJLaf());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
+            }
+            SwingUtilities.updateComponentTreeUI(frame);
+
+        }
     }
 }

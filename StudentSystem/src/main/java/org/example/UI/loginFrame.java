@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class loginFrame extends JFrame implements ActionListener , KeyListener {
+public class loginFrame extends JFrame implements ActionListener {
 
 
     private final Container CONTAINER = this.getContentPane();
@@ -99,7 +99,7 @@ public class loginFrame extends JFrame implements ActionListener , KeyListener {
         CONTAINER.add(passwordText);
 
         //登录注册按钮字体
-        Font loginFont = new Font("宋体",Font.PLAIN,15);
+        Font loginFont = new Font("微软雅黑",Font.PLAIN,15);
 
         //登录按钮
         JButton loginButton = new JButton("登录");
@@ -108,7 +108,7 @@ public class loginFrame extends JFrame implements ActionListener , KeyListener {
         loginButton.setBorderPainted(false);
         loginButton.setBackground(new Color(64,158,255));
         loginButton.setForeground(Color.white);
-        loginButton.setFont(new Font("黑体",Font.BOLD,15));
+        loginButton.setFont(new Font("微软雅黑",Font.BOLD,15));
         CONTAINER.add(loginButton);
 
         loginButton.addActionListener(this);
@@ -120,8 +120,10 @@ public class loginFrame extends JFrame implements ActionListener , KeyListener {
         registeredButton.setBorderPainted(false);
         registeredButton.setBackground(Color.white);
         registeredButton.setForeground(Color.BLACK);
-        registeredButton.setFont(new Font("黑体",Font.BOLD,15));
+        registeredButton.setFont(new Font("微软雅黑",Font.BOLD,15));
         CONTAINER.add(registeredButton);
+
+        registeredButton.addActionListener(this);
 
         //插入登录主界面
         JLabel jLogin = new JLabel(new ImageIcon("image\\login\\loginbackground2.jpg"));
@@ -167,6 +169,9 @@ public class loginFrame extends JFrame implements ActionListener , KeyListener {
             }
         }else if (e.getActionCommand().equals("登录")){
             Login();
+        } else if (e.getActionCommand().equals("注册")) {
+            this.setVisible(false);
+            new registeredFrame();
         }
     }
 
@@ -231,24 +236,4 @@ public class loginFrame extends JFrame implements ActionListener , KeyListener {
         jDialog.setVisible(true);
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER){
-            try {
-                Login();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }
