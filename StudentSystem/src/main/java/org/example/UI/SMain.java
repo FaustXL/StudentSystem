@@ -88,7 +88,9 @@ public class SMain extends JFrame implements ActionListener {
         themeComboBox.addItem("Dark");
 
         themeComboBox.addActionListener(this);
+
         addNaviAction();
+
     }
 
     public SMain() {

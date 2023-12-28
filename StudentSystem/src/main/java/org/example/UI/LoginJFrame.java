@@ -23,11 +23,7 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
     private JLabel text2;
 
     public LoginJFrame(){
-
-
         init();
-
-
     }
 
     public void init(){
