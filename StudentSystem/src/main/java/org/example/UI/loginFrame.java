@@ -31,11 +31,14 @@ public class loginFrame extends JFrame implements ActionListener {
     }
 
     public void createInterface(){
-        /*try {
+        try {
             UIManager.setLookAndFeel( new FlatIntelliJLaf());
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
-        }*/
+        }
+
+        UIManager.put("Button.arc",15);
+        UIManager.put("Button.arc",15);
 
         this.setSize(800,550);
         //设置界面置顶
@@ -45,6 +48,7 @@ public class loginFrame extends JFrame implements ActionListener {
         //设置界面关闭后代码结束运行功能
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
+        SwingUtilities.updateComponentTreeUI(this);
         this.setLayout(null);
     }
 
