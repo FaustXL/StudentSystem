@@ -17,6 +17,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class MainJFrame extends JFrame implements ActionListener{
     private static JFrame frame;
@@ -57,8 +58,11 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JLabel ClassSorce;
     private JLabel ClassPeople;
 
-    //存放数据二维数组
+    //存放学生数据二维数组
     private static String[][] tabledatas = null;
+
+    //存放专业数据的二维数组
+    private static String[][] tableDataOfProfessional_name = null;
 
     //学生表业务
     private static studentServerImpl studentServer = new studentServerImpl();
@@ -86,6 +90,7 @@ public class MainJFrame extends JFrame implements ActionListener{
 
                 if (selectedTab.equals("学生管理")){
                     getAllStudent();
+
                 }else if(selectedTab.equals("课程管理")){
 
                     //点击课程管理标题查询所有课程
@@ -102,6 +107,23 @@ public class MainJFrame extends JFrame implements ActionListener{
                         exception.printStackTrace();
                     }
                     ClassTable.setRowHeight(25);
+
+                }else if (selectedTab.equals("专业管理")){
+
+                    String[] tableTitles = {"专业所属院校","专业名称"};
+                    try {
+                        tableDataOfProfessional_name =
+                                studentServer.dealWithAffiliationAndAffiliation(tableDataOfProfessional_name);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    TableModel data = new DefaultTableModel(tableDataOfProfessional_name,tableTitles);
+                    //文本居中
+                    DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
+                    dc.setHorizontalAlignment(JLabel.CENTER);
+                    MajorTable.setDefaultRenderer(Object.class, dc);
+                    MajorTable.setModel(data);
+
                 }
             }
         });

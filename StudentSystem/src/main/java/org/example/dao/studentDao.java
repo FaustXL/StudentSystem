@@ -9,4 +9,5 @@ public interface studentDao {
     student selectStudentById(String id) throws Exception;
     int insertStudent(student s) throws Exception;
     List<student> selectAffiliation() throws Exception;
+    List<student> selectAffiliationAndAffiliation() throws Exception;
 }
