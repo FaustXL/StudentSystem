@@ -4,6 +4,8 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.example.UI.Teacher.Class.CAdd;
+import org.example.UI.Teacher.Major.MAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
@@ -49,6 +51,11 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JButton MajorDelButton;
     private JButton LogOut;
     private JList list1;
+    private JLabel ClassNum;
+    private JLabel ClassTime;
+    private JLabel ClassName;
+    private JLabel ClassSorce;
+    private JLabel ClassPeople;
 
     //存放数据二维数组
     private String[][] tabledatas = null;
@@ -195,6 +202,7 @@ public class MainJFrame extends JFrame implements ActionListener{
             //创建Jlabel对象管理文字并添加到弹框当中
             JLabel warning = new JLabel(content);
             warning.setBounds(0, 0, 200, 150);
+            warning.setHorizontalAlignment(SwingConstants.CENTER);
             jDialog.getContentPane().add(warning);
 
             //让弹框展示出来
@@ -221,6 +229,8 @@ public class MainJFrame extends JFrame implements ActionListener{
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
+
+
 
         frame = new JFrame("主界面");
         frame.setPreferredSize(new Dimension(1500,800));
@@ -296,6 +306,36 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == ReviseButton) {
             //点击了学生管理-修改
             System.out.println(StudentTable.getSelectedRow());
+        } else if (object == ClassAddButton) {
+            new CAdd();
+        } else if (object == ClassReviseButton) {
+            //点击了课程管理-修改
+            System.out.println(ClassTable.getSelectedRow());
+        } else if (object == ClassDelButton) {
+            //课程管理页面的删除按钮点击事件
+            int i = ClassTable.getSelectedRow();
+            System.out.println(i);
+            if (i<0){
+                showJDialog("未选择");
+            }else {
+                this.setVisible(false);
+                showChooseJDialog();
+            }
+        } else if (object == MajorAddButton) {
+            new MAdd();
+        }else if (object == MajorReviseButton){
+            //点击了专业管理-修改
+            System.out.println(MajorTable.getSelectedRow());
+        } else if (object == MajorDelButton) {
+            //专业管理页面的删除按钮点击事件
+            int i = MajorTable.getSelectedRow();
+            System.out.println(i);
+            if (i<0){
+                showJDialog("未选择");
+            }else {
+                this.setVisible(false);
+                showChooseJDialog();
+            }
         }
     }
 }
