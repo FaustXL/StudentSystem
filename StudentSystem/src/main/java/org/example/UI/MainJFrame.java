@@ -7,6 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import org.example.UI.Teacher.Class.CAdd;
 import org.example.UI.Teacher.Major.MAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
+import org.example.UI.Teacher.Student.SInquire;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -278,6 +279,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         Object object = e.getSource();
         System.out.println(e.getSource());
         if (object == DelButton){
+
             //学生管理页面的删除按钮点击事件
             int i = StudentTable.getSelectedRow();
             System.out.println(i);
@@ -287,11 +289,15 @@ public class MainJFrame extends JFrame implements ActionListener{
                 this.setVisible(false);
                 showChooseJDialog();
             }
+
         } else if (object == AddButton) {
+
             //学生管理页面的添加点击事件
             System.out.println(object);
             new SAddJFrame(this);
+
         } else if (object == themeComboBox) {
+
             //主题选择
             String theme = (String) themeComboBox.getSelectedItem();
             assert theme != null;
@@ -322,18 +328,28 @@ public class MainJFrame extends JFrame implements ActionListener{
                 }
             }
             SwingUtilities.updateComponentTreeUI(frame);
+
         } else if (object == LogOut) {
+
             frame.setVisible(false);
             new loginFrame();
+
         } else if (object == ReviseButton) {
+
             //点击了学生管理-修改
             System.out.println(StudentTable.getSelectedRow());
+
         } else if (object == ClassAddButton) {
+
             new CAdd();
+
         } else if (object == ClassReviseButton) {
+
             //点击了课程管理-修改
             System.out.println(ClassTable.getSelectedRow());
+
         } else if (object == ClassDelButton) {
+
             //课程管理页面的删除按钮点击事件
             int i = ClassTable.getSelectedRow();
             System.out.println(i);
@@ -343,12 +359,18 @@ public class MainJFrame extends JFrame implements ActionListener{
                 this.setVisible(false);
                 showChooseJDialog();
             }
+
         } else if (object == MajorAddButton) {
+
             new MAdd();
+
         }else if (object == MajorReviseButton){
+
             //点击了专业管理-修改
             System.out.println(MajorTable.getSelectedRow());
+
         } else if (object == MajorDelButton) {
+
             //专业管理页面的删除按钮点击事件
             int i = MajorTable.getSelectedRow();
             System.out.println(i);
@@ -358,18 +380,36 @@ public class MainJFrame extends JFrame implements ActionListener{
                 this.setVisible(false);
                 showChooseJDialog();
             }
+
         } else if (object == AllButton) {
+
             StudentTable.selectAll();
+
         } else if (object == CounterButton) {
+
             StudentTable.clearSelection();
+
         } else if (object == ClassAllButton){
+
             ClassTable.selectAll();
+
         } else if (object == ClassCounterButton) {
+
             ClassTable.clearSelection();
+
         } else if (object == MajorAllButton) {
+
             MajorTable.selectAll();
+
         } else if (object == MajorCounterButton){
+
             MajorTable.clearSelection();
+
+        } else if (object == InquireButton) {
+
+            //点击了学生管理-查询按钮
+            new SInquire();
+
         }
     }
 }

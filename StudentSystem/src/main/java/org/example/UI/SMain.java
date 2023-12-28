@@ -25,7 +25,6 @@ public class SMain {
     private JLabel SclassAndGrade;
     private JLabel Saffiliation;
     private JTable ClassTable;
-    private JTable AllClassTable;
     private JTable HomeWorkTable;
     private JLabel theme;
     private JComboBox themeComboBox;
