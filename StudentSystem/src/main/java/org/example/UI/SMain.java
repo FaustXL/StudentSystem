@@ -5,15 +5,21 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.example.domain.student;
+import org.example.domain.studentLesson;
+import org.example.server.impl.studentLessonServeImpl;
 import org.example.server.impl.studentServerImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class SMain extends JFrame implements ActionListener {
     private static JFrame frame;
@@ -40,6 +46,7 @@ public class SMain extends JFrame implements ActionListener {
     private JLabel SID;
 
     private studentServerImpl studentServer = new studentServerImpl();
+    private studentLessonServeImpl studentLessonServe = new studentLessonServeImpl();
 
     public SMain(String id){
         this.id = id;
@@ -64,6 +71,7 @@ public class SMain extends JFrame implements ActionListener {
         }
         frame.setVisible(true);
 
+<<<<<<< HEAD
         Object[] tableTitles = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
         String[][] tabledatas = null;
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
@@ -81,9 +89,50 @@ public class SMain extends JFrame implements ActionListener {
         themeComboBox.addItem("Dark");
 
         themeComboBox.addActionListener(this);
+=======
+        addNaviAction();
+>>>>>>> 158072138c214688bee3750bf6ffa86682f2392e
     }
 
     public SMain() {
+    }
+
+    //添加导航栏点击时间
+    public void addNaviAction(){
+        tabbedPane1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedIndex = tabbedPane1.getSelectedIndex();
+                String selectedTab = tabbedPane1.getTitleAt(selectedIndex);
+                if (selectedTab.equals("课程管理")){
+                    try {
+                        getLessonData();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }else if (selectedTab.equals("作业")){
+                    System.out.println("作业");
+                }
+            }
+        });
+    }
+
+    //获取课程表信息
+    public void getLessonData() throws Exception {
+        String[] tableTitles = {"","星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
+        String[][] tabledatas = null;
+
+        List<studentLesson> studentLesson = studentLessonServe.getStudentLesson(id);
+        tabledatas = studentLessonServe.createLessonTable(studentLesson, tabledatas);
+
+        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+
+        DefaultTableCellRenderer cellRenderer=new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        ClassTable.setDefaultRenderer(Object.class, cellRenderer);
+
+        ClassTable.setModel(data);
+        ClassTable.setRowHeight(70);
     }
 
     //给元素赋值上学生的信息

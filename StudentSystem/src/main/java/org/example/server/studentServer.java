@@ -9,6 +9,7 @@ public interface studentServer {
     student getStudentById(String id) throws Exception;
     int insertStudent(student s) throws Exception;
     List<student> getAffiliation() throws Exception;
-    List<student> getAffiliationAndAffiliation() throws Exception;
-    String[][] dealWithAffiliationAndAffiliation(String[][] tableData) throws Exception;
+    List<student> getAffiliationAndProfessionalName() throws Exception;
+    String[][] dealWithAffiliationAndProfessionalName(String[][] tableData) throws Exception;
+    String[][] selectAllByCondition(student s) throws Exception;
 }

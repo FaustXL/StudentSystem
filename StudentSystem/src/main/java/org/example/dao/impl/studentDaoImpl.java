@@ -93,7 +93,7 @@ public class studentDaoImpl implements studentDao {
     }
 
     @Override
-    public List<student> selectAffiliationAndAffiliation() throws Exception {
+    public List<student> selectAffiliationAndProfessionalName() throws Exception {
         String sql = "SELECT affiliation,professional_name FROM student GROUP BY affiliation,professional_name;";
         Connection connection = jdbcConfig.getConnection();
         List<student> list = new ArrayList<>();
@@ -108,5 +108,50 @@ public class studentDaoImpl implements studentDao {
         return list;
     }
 
-
+    @Override
+    public List<student> selectAllByCondition(student s) throws Exception {
+        String sql = "select * from `student` where ";
+        if (s.getStudentId() != null && !s.getStudentId().equals("")){
+            sql += " and student_id = "+"'"+s.getStudentId()+"'";
+        }if (s.getStudentName() != null && !s.getStudentName().equals("")){
+            sql += " and student_name like "+"'%"+s.getStudentName()+"%'";
+        }if (s.getStudentGender() != null && !s.getStudentGender().equals("")){
+            sql += " and student_gender = "+"'"+s.getStudentGender()+"'";
+        }if (s.getStudentAge() != null){
+            sql += " and student_age = "+s.getStudentAge();
+        }if (s.getIdCardNumber() != null && !s.getIdCardNumber().equals("")){
+            sql += " and id_card_number = "+"'"+s.getIdCardNumber()+"'";
+        }if (s.getAffiliation() != null && !s.getAffiliation().equals("")){
+            sql += " and affiliation = "+"'"+s.getAffiliation()+"'";
+        }if (s.getClasses() != null && !s.getClasses().equals("")){
+            sql += " and class like "+"'%"+s.getClasses()+"%'";
+        }if (s.getProfessionalName() != null && !s.getProfessionalName().equals("")){
+            sql += " and professional_name = "+"'"+s.getProfessionalName()+"'";
+        }if (s.getStudentAddress() != null && !s.getStudentAddress().equals("")){
+            sql += " and student_address like "+"'%"+s.getStudentAddress()+"%'";
+        }if (s.getStudentTel() != null && !s.getStudentTel().equals("")){
+            sql += " and student_tel = "+"'"+s.getStudentTel()+"'";
+        }
+        String sql1 = sql.replaceFirst("and", "");
+        System.out.println(sql1);
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql1);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<student> studentList = new ArrayList<>();
+        while (resultSet.next()) {
+            student stu = new student();
+            stu.setStudentId(resultSet.getString("student_id"));
+            stu.setStudentName(resultSet.getString("student_name"));
+            stu.setStudentGender(resultSet.getString("student_gender"));
+            stu.setStudentAge(resultSet.getInt("student_age"));
+            stu.setIdCardNumber(resultSet.getString("id_card_number"));
+            stu.setAffiliation(resultSet.getString("affiliation"));
+            stu.setClasses(resultSet.getString("class"));
+            stu.setProfessionalName(resultSet.getString("professional_name"));
+            stu.setStudentAddress(resultSet.getString("student_address"));
+            stu.setStudentTel(resultSet.getString("student_tel"));
+            studentList.add(stu);
+        }
+        return studentList;
+    }
 }

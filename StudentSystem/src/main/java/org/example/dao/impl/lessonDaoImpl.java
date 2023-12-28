@@ -28,4 +28,26 @@ public class lessonDaoImpl implements lessonDao {
         }
         return lessonList;
     }
+
+    @Override
+    public lesson selectLessonByLessonId(String lessonId) throws Exception {
+
+        List<lesson> lessonList = new ArrayList<>();
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement =
+                connection.prepareStatement("select * from lesson where lesson_id = ?");
+        preparedStatement.setString(1,lessonId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        lesson l = new lesson();
+        while (resultSet.next()) {
+
+            l.setLessonId(resultSet.getString("lesson_id"));
+            l.setLessonName(resultSet.getString("lesson_name"));
+            l.setStudyHours(resultSet.getInt("study_hours"));
+            l.setCredits(resultSet.getInt("credits"));
+            lessonList.add(l);
+        }
+        return l;
+    }
 }
