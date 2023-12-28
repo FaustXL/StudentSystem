@@ -57,7 +57,7 @@ public class loginFrame extends JFrame implements ActionListener {
         customFont = customFont.deriveFont(14f); // 14f 是字体大小
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts/your-font-file.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("font/江城黑体 900W.ttf")));
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
