@@ -129,6 +129,22 @@ public class MainJFrame extends JFrame implements ActionListener{
             }
         });
 
+        ClassTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = ClassTable.getSelectedRow();
+                System.out.println(row);
+            }
+        });
+
+        MajorTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = MajorTable.getSelectedRow();
+                System.out.println(row);
+            }
+        });
+
 
         /*按钮监听*/
         //学生信息管理页面
