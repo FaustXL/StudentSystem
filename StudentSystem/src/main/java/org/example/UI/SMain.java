@@ -71,7 +71,6 @@ public class SMain extends JFrame implements ActionListener {
         }
         frame.setVisible(true);
 
-<<<<<<< HEAD
         Object[] tableTitles = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
         String[][] tabledatas = null;
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
@@ -89,15 +88,13 @@ public class SMain extends JFrame implements ActionListener {
         themeComboBox.addItem("Dark");
 
         themeComboBox.addActionListener(this);
-=======
         addNaviAction();
->>>>>>> 158072138c214688bee3750bf6ffa86682f2392e
     }
 
     public SMain() {
     }
 
-    //添加导航栏点击时间
+    //添加导航栏点击事件
     public void addNaviAction(){
         tabbedPane1.addMouseListener(new MouseAdapter() {
             @Override
@@ -123,6 +120,7 @@ public class SMain extends JFrame implements ActionListener {
         String[][] tabledatas = null;
 
         List<studentLesson> studentLesson = studentLessonServe.getStudentLesson(id);
+        System.out.println(studentLesson);
         tabledatas = studentLessonServe.createLessonTable(studentLesson, tabledatas);
 
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
@@ -194,7 +192,6 @@ public class SMain extends JFrame implements ActionListener {
                 }
             }
             SwingUtilities.updateComponentTreeUI(frame);
-
         }
     }
 }
