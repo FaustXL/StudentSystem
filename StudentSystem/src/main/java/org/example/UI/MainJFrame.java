@@ -8,6 +8,7 @@ import org.example.UI.Teacher.Class.CAdd;
 import org.example.UI.Teacher.Major.MAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.UI.Teacher.Student.SInquire;
+import org.example.dao.impl.studentDaoImpl;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -71,6 +72,7 @@ public class MainJFrame extends JFrame implements ActionListener{
     //课程表业务
     private lessonServerImpl lessonServer = new lessonServerImpl();
 
+    private studentDaoImpl studentDao = new studentDaoImpl();
 
     public MainJFrame(){
 
@@ -408,7 +410,11 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == InquireButton) {
 
             //点击了学生管理-查询按钮
-            new SInquire();
+            try {
+                new SInquire();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
         }
     }

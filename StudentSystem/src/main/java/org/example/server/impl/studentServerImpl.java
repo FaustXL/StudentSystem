@@ -76,16 +76,37 @@ public class studentServerImpl implements studentServer {
 
     @Override
     public List<student> getAffiliationAndProfessionalName() throws Exception {
-        return studentDao.selectAffiliationAndAffiliation();
+        return studentDao.selectAffiliationAndProfessionalName();
     }
 
     @Override
     public String[][] dealWithAffiliationAndProfessionalName(String[][] tableData) throws Exception {
-        List<student> studentList = studentDao.selectAffiliationAndAffiliation();
+        List<student> studentList = studentDao.selectAffiliationAndProfessionalName();
         tableData = new String[studentList.size()][2];
         for (int i = 0; i < tableData.length; i++) {
             tableData[i][0] = studentList.get(i).getAffiliation();
             tableData[i][1] = studentList.get(i).getProfessionalName();
+        }
+        return tableData;
+    }
+
+    @Override
+    public String[][] selectAllByCondition(student s) throws Exception {
+        List<student> studentList = studentDao.selectAllByCondition(s);
+        System.out.println(studentList);
+        String[][] tableData = new String[studentList.size()][10];
+        for (int i = 0; i < tableData.length; i++) {
+            student student = studentList.get(i);
+            tableData[i][0] = student.getStudentId();
+            tableData[i][1] = student.getStudentName();
+            tableData[i][2] = student.getStudentGender();
+            tableData[i][3] = student.getStudentAge().toString();
+            tableData[i][4] = student.getIdCardNumber();
+            tableData[i][5] = student.getAffiliation();
+            tableData[i][6] = student.getClasses();
+            tableData[i][7] = student.getProfessionalName();
+            tableData[i][8] = student.getStudentAddress();
+            tableData[i][9] = student.getStudentTel();
         }
         return tableData;
     }

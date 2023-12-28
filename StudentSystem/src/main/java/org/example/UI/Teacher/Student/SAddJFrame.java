@@ -3,6 +3,7 @@ package org.example.UI.Teacher.Student;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import org.example.UI.MainJFrame;
 import org.example.domain.student;
+import org.example.server.impl.studentLessonServeImpl;
 import org.example.server.impl.studentServerImpl;
 import org.example.utils.util;
 
@@ -28,6 +29,7 @@ public class SAddJFrame{
     private JTextField MajorTextField;
 
     private studentServerImpl studentServer = new studentServerImpl();
+
     public SAddJFrame(MainJFrame mainJFrame){
 
         JFrame frame = new JFrame("SAddJFrame");
