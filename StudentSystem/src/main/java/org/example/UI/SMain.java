@@ -71,7 +71,7 @@ public class SMain extends JFrame implements ActionListener {
         }
         frame.setVisible(true);
 
-<<<<<<< HEAD
+
         Object[] tableTitles = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
         String[][] tabledatas = null;
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
@@ -89,9 +89,9 @@ public class SMain extends JFrame implements ActionListener {
         themeComboBox.addItem("Dark");
 
         themeComboBox.addActionListener(this);
-=======
+
         addNaviAction();
->>>>>>> 158072138c214688bee3750bf6ffa86682f2392e
+
     }
 
     public SMain() {

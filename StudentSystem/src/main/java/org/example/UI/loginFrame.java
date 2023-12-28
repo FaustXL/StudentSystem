@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 
 public class loginFrame extends JFrame implements ActionListener {
 
@@ -41,6 +43,24 @@ public class loginFrame extends JFrame implements ActionListener {
 
         UIManager.put("Button.arc",15);
         UIManager.put("Button.arc",15);
+
+        // 创建字体对象
+        Font customFont = null;
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/江城黑体 900W.ttf"));
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        // 设置字体大小
+        customFont = customFont.deriveFont(14f); // 14f 是字体大小
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fonts/your-font-file.ttf")));
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
 
         this.setSize(800,550);
         //设置界面置顶
