@@ -78,9 +78,8 @@ public class studentDaoImpl implements studentDao {
     }
 
     @Override
-    public List<student> selectAffiliationAndProfessionalName() throws Exception {
-        String sql = "SELECT affiliation, professional_name FROM student\n" +
-                "GROUP BY affiliation, professional_name;";
+    public List<student> selectAffiliation() throws Exception {
+        String sql = "SELECT affiliation FROM student GROUP BY affiliation;";
         Connection connection = jdbcConfig.getConnection();
         List<student> list = new ArrayList<>();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -88,7 +87,6 @@ public class studentDaoImpl implements studentDao {
         while (resultSet.next()) {
             student student = new student();
             student.setAffiliation(resultSet.getString("affiliation"));
-            student.setProfessionalName(resultSet.getString("professional_name"));
             list.add(student);
         }
         return list;

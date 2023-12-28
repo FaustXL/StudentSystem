@@ -51,10 +51,10 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JList list1;
 
     //存放数据二维数组
-    private String[][] tabledatas = null;
+    private static String[][] tabledatas = null;
 
     //学生表业务
-    private studentServerImpl studentServer = new studentServerImpl();
+    private static studentServerImpl studentServer = new studentServerImpl();
 
     //课程表业务
     private lessonServerImpl lessonServer = new lessonServerImpl();
@@ -258,7 +258,7 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == AddButton) {
             //学生管理页面的添加点击事件
             System.out.println(object);
-            new SAddJFrame();
+            new SAddJFrame(this);
         } else if (object == themeComboBox) {
             //主题选择
             String theme = (String) themeComboBox.getSelectedItem();

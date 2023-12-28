@@ -7,5 +7,6 @@ import java.util.List;
 public interface studentServer {
     String[][] getStudentAll(String[][] tableData) throws Exception;
     student getStudentById(String id) throws Exception;
-    boolean insertStudent(student s) throws Exception;
+    int insertStudent(student s) throws Exception;
+    List<student> getAffiliation() throws Exception;
 }

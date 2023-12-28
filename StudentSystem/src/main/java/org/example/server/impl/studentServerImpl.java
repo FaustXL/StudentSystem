@@ -39,7 +39,25 @@ public class studentServerImpl implements studentServer {
     }
 
     @Override
-    public boolean insertStudent(student s) throws Exception {
+    public int insertStudent(student s) throws Exception {
+        if (s.getClasses() == null || s.getStudentTel() == null || s.getStudentAge() == null ||
+                s.getProfessionalName() == null || s.getAffiliation() == null || s.getStudentAddress() == null ||
+                s.getStudentGender() == null || s.getIdCardNumber() == null || s.getStudentName() == null){
+            return -2;
+        }
+
+        String regexIdCard = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
+        String regexPhoneNumber = "^1[3456789]\\d{9}$";
+
+        if (!s.getIdCardNumber().matches(regexIdCard) || !s.getStudentTel().matches(regexPhoneNumber)){
+            return -1;
+        }
+
+        //当填写的班级不是以1-9开头的两个数字
+        String regex = "^[1-9]{2}$";
+        if (!s.getClasses().substring(0,2).matches(regex)){
+            return -3;
+        }
         int i1 = Integer.parseInt(util.createStudentId(s.getClasses()));
         s.setStudentId(String.valueOf(i1 + 1));
         int i = 0;
@@ -48,6 +66,11 @@ public class studentServerImpl implements studentServer {
         } catch (SQLIntegrityConstraintViolationException exception) {
             System.out.println("服务器繁忙,请稍后再进行插入学生操作");
         }
-        return i > 0;
+        return i;
+    }
+
+    @Override
+    public List<student> getAffiliation() throws Exception {
+        return studentDao.selectAffiliation();
     }
 }
