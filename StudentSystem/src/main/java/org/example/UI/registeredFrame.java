@@ -74,7 +74,7 @@ public class registeredFrame extends JFrame implements ActionListener , FocusLis
             System.out.println("Summit");
         }else if (object == reTurnButton){
             frame.setVisible(false);
-            new loginFrame();
+            new LoginJFrame();
         }
     }
 

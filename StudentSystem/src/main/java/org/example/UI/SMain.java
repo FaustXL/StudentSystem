@@ -29,7 +29,6 @@ public class SMain extends JFrame implements ActionListener {
     private JTabbedPane tabbedPane1;
     private JPanel Myself;
     private JPanel Class;
-    private JPanel Homework;
     private JPanel Setting;
     private JLabel Sname;
     private JLabel Ssex;
@@ -37,7 +36,6 @@ public class SMain extends JFrame implements ActionListener {
     private JLabel SclassAndGrade;
     private JLabel Saffiliation;
     private JTable ClassTable;
-    private JTable HomeWorkTable;
     private JLabel theme;
     private JComboBox themeComboBox;
     private JButton LogOut;
