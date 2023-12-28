@@ -12,8 +12,10 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class loginFrame extends JFrame implements ActionListener {
+public class loginFrame extends JFrame implements ActionListener , KeyListener {
 
 
     private final Container CONTAINER = this.getContentPane();
@@ -164,43 +166,47 @@ public class loginFrame extends JFrame implements ActionListener {
                 setInterface();
             }
         }else if (e.getActionCommand().equals("登录")){
-            String username = usernameText.getText();
-            String password = passwordText.getText();
-            if (usernameStr.equals("学生账号")){
-                if (username.equals("") || password.equals("")){
-                    showJDialog("填写的密码或者账号不能为空");
-                }else{
-                    studentUser studentUser = new studentUser();
-                    studentUserServerImpl studentUserServer = new studentUserServerImpl();
-                    studentUser.setStudentId(username);
-                    studentUser.setPassword(password);
-                    boolean loginSucceed = studentUserServer.isLoginSucceed(studentUser);
-                    if (loginSucceed){
-                        this.setVisible(false);
-                        new SMain(studentUser.getStudentId());
-                    }else {
-                        showJDialog("账号或密码不正确");
-                    }
-                }
-            }else if (usernameStr.equals("教师账号")){
-                administratorServerImpl administratorServer = new administratorServerImpl();
+            Login();
+        }
+    }
 
-                if (username.equals("") || password.equals("")){
-                    showJDialog("填写的密码或者账号不能为空");
+    public void Login() throws Exception {
+        String username = usernameText.getText();
+        String password = passwordText.getText();
+        if (usernameStr.equals("学生账号")){
+            if (username.equals("") || password.equals("")){
+                showJDialog("填写的密码或者账号不能为空");
+            }else{
+                studentUser studentUser = new studentUser();
+                studentUserServerImpl studentUserServer = new studentUserServerImpl();
+                studentUser.setStudentId(username);
+                studentUser.setPassword(password);
+                boolean loginSucceed = studentUserServer.isLoginSucceed(studentUser);
+                if (loginSucceed){
+                    this.setVisible(false);
+                    new SMain(studentUser.getStudentId());
                 }else {
-                    administrator administrator = new administrator();
-                    administrator.setAdministratorUsername(username);
-                    administrator.setAdministratorPassword(password);
-                    boolean b = administratorServer.adminLogin(administrator);
-                    if (b){
-                        this.setVisible(false);
-                        new MainJFrame();
-                    }else {
-                        showJDialog("账号或密码不正确");
-                    }
+                    showJDialog("账号或密码不正确");
                 }
-
             }
+        }else if (usernameStr.equals("教师账号")){
+            administratorServerImpl administratorServer = new administratorServerImpl();
+
+            if (username.equals("") || password.equals("")){
+                showJDialog("填写的密码或者账号不能为空");
+            }else {
+                administrator administrator = new administrator();
+                administrator.setAdministratorUsername(username);
+                administrator.setAdministratorPassword(password);
+                boolean b = administratorServer.adminLogin(administrator);
+                if (b){
+                    this.setVisible(false);
+                    new MainJFrame();
+                }else {
+                    showJDialog("账号或密码不正确");
+                }
+            }
+
         }
     }
 
@@ -223,5 +229,26 @@ public class loginFrame extends JFrame implements ActionListener {
 
         //让弹框展示出来
         jDialog.setVisible(true);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            try {
+                Login();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
