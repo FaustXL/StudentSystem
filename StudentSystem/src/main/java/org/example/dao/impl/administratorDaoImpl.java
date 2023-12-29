@@ -27,4 +27,15 @@ public class administratorDaoImpl implements administratorDao {
         System.out.println(administrator);
         return administrator;
     }
+
+    @Override
+    public int insertAdmin(administrator admin) throws Exception {
+        String sql = "INSERT INTO `administrator` (`administrator_username`, `administrator_password`) VALUES (?, ?)";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,admin.getAdministratorUsername());
+        preparedStatement.setString(2,admin.getAdministratorPassword());
+        int i = preparedStatement.executeUpdate();
+        return i;
+    }
 }

@@ -25,4 +25,15 @@ public class studentUserDaoImpl implements studentUserDao {
         System.out.println(studentUser);
         return studentUser;
     }
+
+    @Override
+    public int insertStudentUser(studentUser user) throws Exception {
+        String sql = "INSERT INTO `student_user` (`student_id`, `student_password`) VALUES (?, ?)";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,user.getStudentId());
+        preparedStatement.setString(2,user.getPassword());
+        int i = preparedStatement.executeUpdate();
+        return i;
+    }
 }

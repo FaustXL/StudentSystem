@@ -1,5 +1,12 @@
 package org.example.UI;
 
+import org.example.dao.impl.administratorDaoImpl;
+import org.example.dao.impl.studentDaoImpl;
+import org.example.dao.impl.studentUserDaoImpl;
+import org.example.domain.administrator;
+import org.example.domain.student;
+import org.example.domain.studentUser;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -7,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.regex.Pattern;
 
 public class registeredFrame extends JFrame implements ActionListener , FocusListener {
     private static JFrame frame;
@@ -18,6 +26,11 @@ public class registeredFrame extends JFrame implements ActionListener , FocusLis
     private JLabel text2;
     private JComboBox comboBox1;
     private JButton reTurnButton;
+
+
+    private studentUserDaoImpl studentUserDao = new studentUserDaoImpl();
+    private studentDaoImpl studentDao = new studentDaoImpl();
+    private administratorDaoImpl administratorDao = new administratorDaoImpl();
 
     public registeredFrame(){
         init();
@@ -71,7 +84,65 @@ public class registeredFrame extends JFrame implements ActionListener , FocusLis
     public void actionPerformed(ActionEvent e) {
         Object object = e.getSource();
         if (object == ActionButton){
-            System.out.println("Summit");
+            String username = textField1.getText();
+            String password = passwordField1.getText();
+            if ("学生".equals(comboBox1.getSelectedItem())){
+                try {
+                    student student = studentDao.selectStudentById(username);
+                    studentUser studentUser = studentUserDao.selectByUsername(username);
+                    if (studentUser.getId() != 0 && studentUser.getStudentId() != null){
+                        showJDialog("注册的账户已存在");
+                    }
+                    else if (student.getStudentId() == null && student.getStudentName() == null){
+                        showJDialog("要注册的学生不存在");
+                    }else {
+                        boolean valid = Pattern.matches("^.{8,16}$", password);
+                        if (valid) {
+                            studentUser user = new studentUser();
+                            user.setStudentId(username);
+                            user.setPassword(password);
+                            int i = studentUserDao.insertStudentUser(user);
+                            if (i > 0) {
+                                showJDialog("注册成功");
+                                frame.setVisible(false);
+                                new loginFrame();
+                            } else {
+                                showJDialog("注册失败");
+                            }
+                        } else {
+                            showJDialog("密码格式填写有误：格式为8-16位");
+                        }
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }else {
+                try {
+                    administrator administrator = administratorDao.selectAdministratorByUsername(username);
+                    if (administrator.getAdministratorId() != null){
+                        showJDialog("要注册的用户已存在");
+                    }else {
+                        boolean valid = Pattern.matches("^.{8,16}$", password);
+                        if (valid){
+                            administrator admin = new administrator();
+                            admin.setAdministratorUsername(username);
+                            admin.setAdministratorPassword(password);
+                            int i = administratorDao.insertAdmin(admin);
+                            if (i > 0) {
+                                showJDialog("注册成功");
+                                frame.setVisible(false);
+                                new loginFrame();
+                            } else {
+                                showJDialog("注册失败");
+                            }
+                        }else {
+                            showJDialog("密码格式填写有误：格式为8-16位");
+                        }
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
         }else if (object == reTurnButton){
             frame.setVisible(false);
             new LoginJFrame();
@@ -99,6 +170,37 @@ public class registeredFrame extends JFrame implements ActionListener , FocusLis
             if (String.valueOf(passwordField1.getPassword()).isEmpty()){
                 text2.setText("密码");
             }
+        }
+    }
+    //只创建一个弹框对象
+    JDialog jDialog = new JDialog();
+
+
+    //因为展示弹框的代码，会被运行多次
+    //所以，我们把展示弹框的代码，抽取到一个方法中。以后用到的时候，就不需要写了
+    //直接调用就可以了。
+    //展示弹框
+    public void showJDialog(String content) {
+        if(!jDialog.isVisible()){
+            //创建一个弹框对象
+            JDialog jDialog = new JDialog();
+            //给弹框设置大小
+            jDialog.setSize(200, 150);
+            //让弹框置顶
+            jDialog.setAlwaysOnTop(true);
+            //让弹框居中
+            jDialog.setLocationRelativeTo(null);
+            //弹框不关闭永远无法操作下面的界面
+            jDialog.setModal(true);
+
+            //创建Jlabel对象管理文字并添加到弹框当中
+            JLabel warning = new JLabel(content);
+            warning.setBounds(0, 0, 200, 150);
+            warning.setHorizontalAlignment(SwingConstants.CENTER);
+            jDialog.getContentPane().add(warning);
+
+            //让弹框展示出来
+            jDialog.setVisible(true);
         }
     }
 }

@@ -304,6 +304,10 @@ public class MainJFrame extends JFrame implements ActionListener{
 
             //学生管理页面的删除按钮点击事件
             int i = StudentTable.getSelectedRow();
+            for (int i1 = 0; i1 < tabledatas[i - 1].length; i1++) {
+                System.out.println(tabledatas[i][i1]);
+            }
+
             System.out.println(i);
             if (i<0){
                 showJDialog("未选择");
