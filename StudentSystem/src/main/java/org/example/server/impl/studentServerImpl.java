@@ -6,6 +6,7 @@ import org.example.server.studentServer;
 import org.example.utils.util;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class studentServerImpl implements studentServer {
@@ -109,5 +110,13 @@ public class studentServerImpl implements studentServer {
             tableData[i][9] = student.getStudentTel();
         }
         return tableData;
+    }
+
+    @Override
+    public int deleteStudentByList(List<String> list) throws Exception {
+        for (String s : list) {
+            studentDao.deleteStudentById(s);
+        }
+        return 1;
     }
 }

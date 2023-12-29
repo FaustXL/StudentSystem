@@ -23,4 +23,22 @@ public class lessonServerImpl implements lessonServer {
             }
         return tableData;
     }
+
+    @Override
+    public int insertLesson(lesson l) throws Exception {
+        return lessonDao.insertLesson(l);
+    }
+
+    @Override
+    public List<String> getLessonPeople(String lessonId) throws Exception {
+        return lessonDao.getLessonPeople(lessonId);
+    }
+
+    @Override
+    public int deleteLessonByList(List<String> list) throws Exception {
+        for (String s : list) {
+            lessonDao.deleteLessonById(s);
+        }
+        return 1;
+    }
 }

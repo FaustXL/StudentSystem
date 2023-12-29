@@ -4,11 +4,14 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import lombok.SneakyThrows;
 import org.example.UI.Teacher.Class.CAdd;
 import org.example.UI.Teacher.Major.MAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.UI.Teacher.Student.SInquire;
 import org.example.dao.impl.studentDaoImpl;
+import org.example.domain.lesson;
+import org.example.domain.student;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -19,6 +22,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainJFrame extends JFrame implements ActionListener{
@@ -63,6 +67,9 @@ public class MainJFrame extends JFrame implements ActionListener{
     //存放学生数据二维数组
     private static String[][] tabledatas = null;
 
+    private static String[][] lesosnTableDatas = null;
+
+
     //存放专业数据的二维数组
     private static String[][] tableDataOfProfessional_name = null;
 
@@ -96,20 +103,7 @@ public class MainJFrame extends JFrame implements ActionListener{
 
                 }else if(selectedTab.equals("课程管理")){
 
-                    //点击课程管理标题查询所有课程
-                    String[] tableTitles = {"课程号","课程名称","学时","学分"};
-                    try {
-                        tabledatas = lessonServer.getsLessonAll(tabledatas);
-                        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
-                        //文本居中
-                        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
-                        dc.setHorizontalAlignment(JLabel.CENTER);
-                        ClassTable.setDefaultRenderer(Object.class, dc);
-                        ClassTable.setModel(data);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    ClassTable.setRowHeight(25);
+                    getLessonAll();
 
                 }else if (selectedTab.equals("专业管理")){
 
@@ -132,9 +126,15 @@ public class MainJFrame extends JFrame implements ActionListener{
         });
 
         ClassTable.addMouseListener(new MouseAdapter() {
+            @SneakyThrows
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = ClassTable.getSelectedRow();
+                ClassName.setText(lesosnTableDatas[row][1]);
+                ClassNum.setText(lesosnTableDatas[row][0]);
+                ClassTime.setText(lesosnTableDatas[row][2]);
+                ClassSorce.setText(lesosnTableDatas[row][3]);
+                ClassPeople.setText(String.valueOf(lessonServer.getLessonPeople(lesosnTableDatas[row][0]).size()));
                 System.out.println(row);
             }
         });
@@ -177,6 +177,23 @@ public class MainJFrame extends JFrame implements ActionListener{
         //设置页面
         themeComboBox.addActionListener(this);
         LogOut.addActionListener(this);
+    }
+
+    public void getLessonAll(){
+        //点击课程管理标题查询所有课程
+        String[] tableTitles = {"课程号","课程名称","学时","学分"};
+        try {
+            lesosnTableDatas = lessonServer.getsLessonAll(lesosnTableDatas);
+            TableModel data = new DefaultTableModel(lesosnTableDatas,tableTitles);
+            //文本居中
+            DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
+            dc.setHorizontalAlignment(JLabel.CENTER);
+            ClassTable.setDefaultRenderer(Object.class, dc);
+            ClassTable.setModel(data);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        ClassTable.setRowHeight(25);
     }
 
     public void getAllStudent(){
@@ -303,17 +320,29 @@ public class MainJFrame extends JFrame implements ActionListener{
         if (object == DelButton){
 
             //学生管理页面的删除按钮点击事件
-            int i = StudentTable.getSelectedRow();
-            for (int i1 = 0; i1 < tabledatas[i - 1].length; i1++) {
-                System.out.println(tabledatas[i][i1]);
-            }
+            int[] i = StudentTable.getSelectedRows();
+            System.out.println(Arrays.toString(i));
 
-            System.out.println(i);
-            if (i<0){
+            if (i.length == 0){
                 showJDialog("未选择");
             }else {
-                this.setVisible(false);
-                showChooseJDialog();
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (int i1 = 0; i1 < i.length; i1++) {
+                    String id = tabledatas[i[i1]][0];
+                    arrayList.add(id);
+                }
+
+
+                int i1 = showChooseJDialog();
+                if (i1 == 0){
+                    try {
+                        studentServer.deleteStudentByList(arrayList);
+                        getAllStudent();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    this.setVisible(false);
+                }
             }
 
         } else if (object == AddButton) {
@@ -371,7 +400,7 @@ public class MainJFrame extends JFrame implements ActionListener{
 
         } else if (object == ClassAddButton) {
 
-            new CAdd();
+            new CAdd(this);
 
         } else if (object == ClassReviseButton) {
 
@@ -381,13 +410,29 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == ClassDelButton) {
 
             //课程管理页面的删除按钮点击事件
-            int i = ClassTable.getSelectedRow();
-            System.out.println(i);
-            if (i<0){
+            int[] i = ClassTable.getSelectedRows();
+            System.out.println(Arrays.toString(i));
+
+            if (i.length == 0){
                 showJDialog("未选择");
             }else {
-                this.setVisible(false);
-                showChooseJDialog();
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (int i1 = 0; i1 < i.length; i1++) {
+                    String id = lesosnTableDatas[i[i1]][0];
+                    arrayList.add(id);
+                }
+
+
+                int i1 = showChooseJDialog();
+                if (i1 == 0){
+                    try {
+                        lessonServer.deleteLessonByList(arrayList);
+                        getLessonAll();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    this.setVisible(false);
+                }
             }
 
         } else if (object == MajorAddButton) {

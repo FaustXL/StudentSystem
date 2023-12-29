@@ -50,4 +50,52 @@ public class lessonDaoImpl implements lessonDao {
         }
         return l;
     }
+
+    @Override
+    public int insertLesson(lesson l) throws Exception {
+        Connection connection = jdbcConfig.getConnection();
+        String sql = "INSERT INTO `lesson` (`lesson_id`, `lesson_name`, `study_hours`, `credits`) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,l.getLessonId());
+        preparedStatement.setString(2,l.getLessonName());
+        preparedStatement.setInt(3,l.getStudyHours());
+        preparedStatement.setInt(4,l.getCredits());
+        int i = preparedStatement.executeUpdate();
+        return i;
+    }
+
+    @Override
+    public List<String> getLessonPeople(String lessonId) throws Exception {
+        Connection connection = jdbcConfig.getConnection();
+        List<String> list = new ArrayList<>();
+        String sql = "select `class` from student_lesson  where lesson_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,lessonId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            list.add(resultSet.getString("class"));
+        }
+        String sql1 = "SELECT * FROM student_system.student where `class` = ?";
+        List<String> nameList = new ArrayList<>();
+        PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+        for (String s : list) {
+            preparedStatement1.setString(1,s);
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            while (resultSet1.next()) {
+                String student_name = resultSet1.getString("student_name");
+                nameList.add(student_name);
+            }
+        }
+        return nameList;
+    }
+
+    @Override
+    public int deleteLessonById(String id) throws Exception {
+        String sql = "DELETE FROM `lesson` WHERE (`lesson_id` = ?);";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id);
+        int i = preparedStatement.executeUpdate();
+        return i;
+    }
 }

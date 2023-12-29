@@ -154,4 +154,14 @@ public class studentDaoImpl implements studentDao {
         }
         return studentList;
     }
+
+    @Override
+    public int deleteStudentById(String id) throws Exception {
+        String sql = "DELETE FROM `student_system`.`student` WHERE (`student_id` = ?);";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,id);
+        int i = preparedStatement.executeUpdate();
+        return i;
+    }
 }
