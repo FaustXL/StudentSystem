@@ -103,7 +103,48 @@ public class MainJFrame extends JFrame implements ActionListener{
 
                 }else if(selectedTab.equals("课程管理")){
 
-                    getLessonAll();
+                    //点击课程管理标题查询所有课程
+                    String[] tableTitles = {"课程号","课程名称","学时","学分"};
+                    try {
+                        tabledatas = lessonServer.getsLessonAll(tabledatas);
+                        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
+                        //文本居中
+                        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
+                        dc.setHorizontalAlignment(JLabel.CENTER);
+                        ClassTable.setDefaultRenderer(Object.class, dc);
+                        ClassTable.setModel(data);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    ClassTable.setRowHeight(30);
+
+                    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                            if (UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatIntelliJLaf]")
+                                    ||UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatLightLaf]")){
+                                if (row % 2 == 1) {
+                                    setBackground(new Color(247,249,252));
+//                    setForeground(Color.WHITE);
+                                }else{
+                                    setBackground(Color.WHITE);
+//                    setForeground(Color.WHITE);
+                                }
+                            }else {
+                                if (row % 2 == 1) {
+                                    setBackground(new Color(40, 40, 40));
+                                }else {
+                                    setBackground(new Color( 60,  63,  65));
+                                }
+                            }
+
+                            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                        }
+                    };
+                    tcr.setHorizontalAlignment(JLabel.CENTER);
+                    int columnCount = ClassTable.getColumnCount();
+                    for (int i = 0; i < columnCount; i++) {
+                        ClassTable.getColumn(ClassTable.getColumnName(i)).setCellRenderer(tcr);
+                    }
 
                 }else if (selectedTab.equals("专业管理")){
 
@@ -115,12 +156,37 @@ public class MainJFrame extends JFrame implements ActionListener{
                         exception.printStackTrace();
                     }
                     TableModel data = new DefaultTableModel(tableDataOfProfessional_name,tableTitles);
-                    //文本居中
-                    DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
-                    dc.setHorizontalAlignment(JLabel.CENTER);
-                    MajorTable.setDefaultRenderer(Object.class, dc);
-                    MajorTable.setModel(data);
 
+                    MajorTable.setModel(data);
+                    MajorTable.setRowHeight(30);
+
+                    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                            if (UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatIntelliJLaf]")
+                                    ||UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatLightLaf]")){
+                                if (row % 2 == 1) {
+                                    setBackground(new Color(247,249,252));
+//                    setForeground(Color.WHITE);
+                                }else{
+                                    setBackground(Color.WHITE);
+//                    setForeground(Color.WHITE);
+                                }
+                            }else {
+                                if (row % 2 == 1) {
+                                    setBackground(new Color(40, 40, 40));
+                                }else {
+                                    setBackground(new Color( 60,  63,  65));
+                                }
+                            }
+
+                            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                        }
+                    };
+                    tcr.setHorizontalAlignment(JLabel.CENTER);
+                    int columnCount = MajorTable.getColumnCount();
+                    for (int i = 0; i < columnCount; i++) {
+                        MajorTable.getColumn(MajorTable.getColumnName(i)).setCellRenderer(tcr);
+                    }
                 }
             }
         });
@@ -206,15 +272,10 @@ public class MainJFrame extends JFrame implements ActionListener{
         }
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
 
-        //文本居中
-        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
-        dc.setHorizontalAlignment(JLabel.CENTER);
-        StudentTable.setDefaultRenderer(Object.class, dc);
-
         StudentTable.setModel(data);
 
         //设置行高
-        StudentTable.setRowHeight(25);
+        StudentTable.setRowHeight(30);
 
         StudentTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);// 以下设置表格列宽
         TableColumn column = StudentTable.getColumnModel().getColumn(0);
@@ -234,6 +295,34 @@ public class MainJFrame extends JFrame implements ActionListener{
         column = StudentTable.getColumnModel().getColumn(7);
         column.setPreferredWidth(100);
         column.setMaxWidth(200);
+
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatIntelliJLaf]")
+                        ||UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatLightLaf]")){
+                    if (row % 2 == 1) {
+                        setBackground(new Color(247,249,252));
+//                    setForeground(Color.WHITE);
+                    }else{
+                        setBackground(Color.WHITE);
+//                    setForeground(Color.WHITE);
+                    }
+                }else {
+                    if (row % 2 == 1) {
+                        setBackground(new Color(40, 40, 40));
+                    }else {
+                        setBackground(new Color( 60,  63,  65));
+                    }
+                }
+
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+        tcr.setHorizontalAlignment(JLabel.CENTER);
+        int columnCount = StudentTable.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+            StudentTable.getColumn(StudentTable.getColumnName(i)).setCellRenderer(tcr);
+        }
     }
 
     //只创建一个弹框对象
@@ -397,6 +486,13 @@ public class MainJFrame extends JFrame implements ActionListener{
 
             //点击了学生管理-修改
             System.out.println(StudentTable.getSelectedRow());
+            int i = StudentTable.getSelectedRow();
+            System.out.println("修改："+i);
+            if (i<0){
+                showJDialog("未选择");
+            }else {
+                System.out.println("调用修改");
+            }
 
         } else if (object == ClassAddButton) {
 
