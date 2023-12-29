@@ -41,6 +41,8 @@ public class registeredFrame extends JFrame implements ActionListener , FocusLis
         frame = new JFrame("registeredFrame");
         frame.setPreferredSize(new Dimension(800,530));
 //        frame.setContentPane(Main);
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.getContentPane().add(Main);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

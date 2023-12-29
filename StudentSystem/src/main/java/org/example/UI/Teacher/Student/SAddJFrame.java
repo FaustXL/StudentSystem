@@ -34,6 +34,8 @@ public class SAddJFrame{
 
         JFrame frame = new JFrame("SAddJFrame");
         frame.setPreferredSize(new Dimension(500,400));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(SAdd);
         frame.pack();
         frame.setLocationRelativeTo(null);

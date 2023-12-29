@@ -65,12 +65,16 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
 
         frame = new JFrame("Login");
         frame.setPreferredSize(new Dimension(800,530));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.getContentPane().add(Main);
         SwingUtilities.updateComponentTreeUI(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+
 
         comboBox1.addItem("学生");
         comboBox1.addItem("教师");

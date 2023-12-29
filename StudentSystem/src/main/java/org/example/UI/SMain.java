@@ -54,6 +54,8 @@ public class SMain extends JFrame implements ActionListener {
 
         frame = new JFrame("SMain");
         frame.setPreferredSize(new Dimension(1000,800));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(SMain);
         SwingUtilities.updateComponentTreeUI(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

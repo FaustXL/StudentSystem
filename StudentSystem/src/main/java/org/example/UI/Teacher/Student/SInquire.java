@@ -32,6 +32,8 @@ public class SInquire implements ActionListener {
     public SInquire() throws Exception {
         JFrame frame = new JFrame("SInquire");
         frame.setPreferredSize(new Dimension(500,400));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(Main);
         frame.pack();
         frame.setLocationRelativeTo(null);
