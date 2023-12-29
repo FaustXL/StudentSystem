@@ -361,7 +361,7 @@ public class MainJFrame extends JFrame implements ActionListener{
             int n = showLoginOutJDialog();
             if (n == 0){
                 frame.setVisible(false);
-                new loginFrame();
+                new LoginJFrame();
             }
 
         } else if (object == ReviseButton) {
