@@ -98,4 +98,18 @@ public class lessonDaoImpl implements lessonDao {
         int i = preparedStatement.executeUpdate();
         return i;
     }
+
+    @Override
+    public int updateLesson(lesson l) throws Exception {
+        String sql = "UPDATE `student_system`.`lesson` SET `lesson_name` = ?, " +
+                "`study_hours` = ?, `credits` = ? WHERE (`lesson_id` = ?);";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,l.getLessonName());
+        preparedStatement.setInt(2,l.getStudyHours());
+        preparedStatement.setInt(3,l.getCredits());
+        preparedStatement.setString(4,l.getLessonId());
+
+        return preparedStatement.executeUpdate();
+    }
 }

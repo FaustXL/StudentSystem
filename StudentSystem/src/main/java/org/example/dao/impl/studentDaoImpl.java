@@ -4,6 +4,7 @@ import org.example.dao.studentDao;
 import org.example.domain.student;
 import org.example.utils.jdbcConfig;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -163,5 +164,40 @@ public class studentDaoImpl implements studentDao {
         preparedStatement.setString(1,id);
         int i = preparedStatement.executeUpdate();
         return i;
+    }
+
+    @Override
+    public int updateStudent(student s) throws Exception {
+        String sql = "UPDATE `student` SET `student_name` = ?, `student_gender` = ?, `student_age` = ?, " +
+                "`id_card_number` = ?, `affiliation` = ?, `class` = ?, `professional_name` = ?, " +
+                "`student_address` = ?, `student_tel` = ? WHERE (`student_id` = ?);";
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,s.getStudentName());
+        preparedStatement.setString(2,s.getStudentGender());
+        preparedStatement.setInt(3,s.getStudentAge());
+        preparedStatement.setString(4,s.getIdCardNumber());
+        preparedStatement.setString(5,s.getAffiliation());
+        preparedStatement.setString(6,s.getClasses());
+        preparedStatement.setString(7,s.getProfessionalName());
+        preparedStatement.setString(8,s.getStudentAddress());
+        preparedStatement.setString(9,s.getStudentTel());
+        preparedStatement.setString(10,s.getStudentId());
+        return preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public List<String> selectClassByProfessionalName(String professionalName) throws Exception {
+        Connection connection = jdbcConfig.getConnection();
+        PreparedStatement preparedStatement =
+                connection.prepareStatement("select `class` from student where `professional_name` = ?");
+        preparedStatement.setString(1,professionalName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<String> list = new ArrayList<>();
+        while (resultSet.next()) {
+            list.add(resultSet.getString("class"));
+        }
+        System.out.println(professionalName);
+        return list;
     }
 }

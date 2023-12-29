@@ -13,4 +13,6 @@ public interface studentServer {
     String[][] dealWithAffiliationAndProfessionalName(String[][] tableData) throws Exception;
     String[][] selectAllByCondition(student s) throws Exception;
     int deleteStudentByList(List<String> list) throws Exception;
+    int updateStudent(student s) throws Exception;
+    List<String> selectClassByProfessionalName(String professionalName) throws Exception;
 }

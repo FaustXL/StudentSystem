@@ -12,4 +12,6 @@ public interface studentDao {
     List<student> selectAffiliationAndProfessionalName() throws Exception;
     List<student> selectAllByCondition(student s) throws Exception;
     int deleteStudentById(String id) throws  Exception;
+    int updateStudent(student s) throws Exception;
+    List<String> selectClassByProfessionalName(String professionalName) throws Exception;
 }

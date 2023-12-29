@@ -41,4 +41,9 @@ public class lessonServerImpl implements lessonServer {
         }
         return 1;
     }
+
+    @Override
+    public int updateLesson(lesson l) throws Exception {
+        return lessonDao.updateLesson(l);
+    }
 }

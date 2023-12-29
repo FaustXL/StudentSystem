@@ -501,7 +501,7 @@
                       <text value="专业名 : "/>
                     </properties>
                   </component>
-                  <component id="20fe5" class="javax.swing.JLabel">
+                  <component id="20fe5" class="javax.swing.JLabel" binding="majorName">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -517,7 +517,7 @@
                       <text value="所属院系 : "/>
                     </properties>
                   </component>
-                  <component id="7a7a" class="javax.swing.JLabel">
+                  <component id="7a7a" class="javax.swing.JLabel" binding="affiliationName">
                     <constraints>
                       <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>

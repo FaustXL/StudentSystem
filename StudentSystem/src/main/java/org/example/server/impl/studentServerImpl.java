@@ -119,4 +119,38 @@ public class studentServerImpl implements studentServer {
         }
         return 1;
     }
+
+    @Override
+    public int updateStudent(student s) throws Exception {
+        if (s.getClasses() == null || s.getStudentTel() == null || s.getStudentAge() == null ||
+                s.getProfessionalName() == null || s.getAffiliation() == null || s.getStudentAddress() == null ||
+                s.getStudentGender() == null || s.getIdCardNumber() == null || s.getStudentName() == null){
+            return -2;
+        }
+        String regexIdCard = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
+        String regexPhoneNumber = "^1[3456789]\\d{9}$";
+
+        if (!s.getIdCardNumber().matches(regexIdCard) || !s.getStudentTel().matches(regexPhoneNumber)){
+            return -1;
+        }
+
+        //当填写的班级不是以1-9开头的两个数字
+        String regex = "^[1-9]{2}$";
+        if (!s.getClasses().substring(0,2).matches(regex)){
+            return -3;
+        }
+
+        int i = 0;
+        try {
+            i = studentDao.updateStudent(s);
+        } catch (SQLIntegrityConstraintViolationException exception) {
+            System.out.println("服务器繁忙,请稍后再进行插入学生操作");
+        }
+        return i;
+    }
+
+    @Override
+    public List<String> selectClassByProfessionalName(String professionalName) throws Exception {
+        return studentDao.selectClassByProfessionalName(professionalName);
+    }
 }

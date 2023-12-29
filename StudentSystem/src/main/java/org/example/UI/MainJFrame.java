@@ -24,6 +24,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainJFrame extends JFrame implements ActionListener{
     private static JFrame frame;
@@ -63,6 +64,8 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JLabel ClassName;
     private JLabel ClassSorce;
     private JLabel ClassPeople;
+    private JLabel majorName;
+    private JLabel affiliationName;
 
     //存放学生数据二维数组
     private static String[][] tabledatas = null;
@@ -197,6 +200,20 @@ public class MainJFrame extends JFrame implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = MajorTable.getSelectedRow();
+                majorName.setText(tableDataOfProfessional_name[row][0]);
+                affiliationName.setText(tableDataOfProfessional_name[row][1]);
+                try {
+                    List<String> list = studentServer.selectClassByProfessionalName(tableDataOfProfessional_name[row][1]);
+                    System.out.println(list);
+                    DefaultListModel model = new DefaultListModel();
+                    for (String s : list) {
+                        model.addElement(s);
+                    }
+                    list1.setModel(model);
+
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
                 System.out.println(row);
             }
         });
