@@ -103,20 +103,7 @@ public class MainJFrame extends JFrame implements ActionListener{
 
                 }else if(selectedTab.equals("课程管理")){
 
-                    //点击课程管理标题查询所有课程
-                    String[] tableTitles = {"课程号","课程名称","学时","学分"};
-                    try {
-                        tabledatas = lessonServer.getsLessonAll(tabledatas);
-                        TableModel data = new DefaultTableModel(tabledatas,tableTitles);
-                        //文本居中
-                        DefaultTableCellRenderer dc=new DefaultTableCellRenderer();
-                        dc.setHorizontalAlignment(JLabel.CENTER);
-                        ClassTable.setDefaultRenderer(Object.class, dc);
-                        ClassTable.setModel(data);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    ClassTable.setRowHeight(30);
+                    getLessonAll();
 
                     DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
                         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -196,6 +183,7 @@ public class MainJFrame extends JFrame implements ActionListener{
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = ClassTable.getSelectedRow();
+                System.out.println(row);
                 ClassName.setText(lesosnTableDatas[row][1]);
                 ClassNum.setText(lesosnTableDatas[row][0]);
                 ClassTime.setText(lesosnTableDatas[row][2]);
