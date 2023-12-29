@@ -104,6 +104,7 @@ public class SMain extends JFrame implements ActionListener {
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+                    System.out.println(UIManager.getLookAndFeel().toString());
                 }else if (selectedTab.equals("作业")){
                     System.out.println("作业");
                 }
@@ -122,34 +123,61 @@ public class SMain extends JFrame implements ActionListener {
 
         TableModel data = new DefaultTableModel(tabledatas,tableTitles);
 
-        DefaultTableCellRenderer cellRenderer=new DefaultTableCellRenderer();
+        /*DefaultTableCellRenderer cellRenderer=new DefaultTableCellRenderer();
         cellRenderer.setHorizontalAlignment(JLabel.CENTER);
-        ClassTable.setDefaultRenderer(Object.class, cellRenderer);
+        ClassTable.setDefaultRenderer(Object.class, cellRenderer);*/
 
         ClassTable.setModel(data);
         ClassTable.setRowHeight(70);
 
         ClassTable.getTableHeader().setPreferredSize(new Dimension(-1,50));
-        ClassTable.getTableHeader().setBackground(new Color(239, 247, 253));
+
+        if (UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatIntelliJLaf]")
+                ||UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatLightLaf]")){
+            ClassTable.getTableHeader().setBackground(new Color(239, 247, 253));
+        }else {
+            ClassTable.getTableHeader().setBackground(new Color( 96,  98, 102));
+        }
 
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                if (row % 2 == 1) {
-                    setBackground(new Color(247,249,252));
+                if (UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatIntelliJLaf]")
+                        ||UIManager.getLookAndFeel().toString().equals("[Flat IntelliJ Look and Feel - com.formdev.flatlaf.FlatLightLaf]")){
+                    if (row % 2 == 1) {
+                        setBackground(new Color(247,249,252));
 //                    setForeground(Color.WHITE);
-                }else{
-                    setBackground(Color.WHITE);
+                    }else{
+                        setBackground(Color.WHITE);
 //                    setForeground(Color.WHITE);
+                    }
+                }else {
+                    if (row % 2 == 1) {
+                        setBackground(new Color(40, 40, 40));
+                    }else {
+                        setBackground(new Color( 60,  63,  65));
+                    }
                 }
 
                 return super.getTableCellRendererComponent(table, value,
                         isSelected, hasFocus, row, column);
             }
         };
+        tcr.setHorizontalAlignment(JLabel.CENTER);
         int columnCount = ClassTable.getColumnCount();
         for (int i = 0; i < columnCount; i++) {
             ClassTable.getColumn(ClassTable.getColumnName(i)).setCellRenderer(tcr);
         }
+
+        ClassTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);// 以下设置表格列宽
+        TableColumn column = ClassTable.getColumnModel().getColumn(6);
+        column.setPreferredWidth(50);
+        column.setMaxWidth(200);
+        column = ClassTable.getColumnModel().getColumn(7);
+        column.setPreferredWidth(50);
+        column.setMaxWidth(200);
+        column = ClassTable.getColumnModel().getColumn(0);
+        column.setPreferredWidth(100);
+        column.setMaxWidth(200);
     }
 
     //给元素赋值上学生的信息
