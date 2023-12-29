@@ -27,6 +27,10 @@ public class Outcome implements ActionListener {
         this.tabledatas = tabledatas;
         JFrame frame = new JFrame("Outcome");
         frame.setPreferredSize(new Dimension(1000,800));
+
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
+
         frame.setContentPane(Main);
 
         frame.pack();

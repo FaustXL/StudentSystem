@@ -6,12 +6,9 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import lombok.SneakyThrows;
 import org.example.UI.Teacher.Class.CAdd;
-import org.example.UI.Teacher.Major.MAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.UI.Teacher.Student.SInquire;
 import org.example.dao.impl.studentDaoImpl;
-import org.example.domain.lesson;
-import org.example.domain.student;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -42,7 +39,6 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JButton ClassAddButton;
     private JButton ClassDelButton;
     private JButton ClassReviseButton;
-    private JButton ClassInquireButton;
     private JButton ClassAllButton;
     private JButton ClassCounterButton;
     private JPanel setting;
@@ -50,12 +46,7 @@ public class MainJFrame extends JFrame implements ActionListener{
     private JLabel theme;
     private JPanel MajorManage;
     private JTable MajorTable;
-    private JButton MajorAddButton;
-    private JButton MajorReviseButton;
-    private JButton MajorInquireButton;
-    private JButton MajorAllButton;
     private JButton MajorCounterButton;
-    private JButton MajorDelButton;
     private JButton LogOut;
     private JList list1;
     private JLabel ClassNum;
@@ -215,16 +206,10 @@ public class MainJFrame extends JFrame implements ActionListener{
         ClassAddButton.addActionListener(this);
         ClassDelButton.addActionListener(this);
         ClassReviseButton.addActionListener(this);
-        ClassInquireButton.addActionListener(this);
         ClassAllButton.addActionListener(this);
         ClassCounterButton.addActionListener(this);
 
         //专业管理页面
-        MajorAddButton.addActionListener(this);
-        MajorDelButton.addActionListener(this);
-        MajorReviseButton.addActionListener(this);
-        MajorInquireButton.addActionListener(this);
-        MajorAllButton.addActionListener(this);
         MajorCounterButton.addActionListener(this);
 
 
@@ -373,6 +358,8 @@ public class MainJFrame extends JFrame implements ActionListener{
 
         frame = new JFrame("主界面");
         frame.setPreferredSize(new Dimension(1500,800));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(panel1);
         SwingUtilities.updateComponentTreeUI(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -519,27 +506,6 @@ public class MainJFrame extends JFrame implements ActionListener{
                 }
             }
 
-        } else if (object == MajorAddButton) {
-
-            new MAdd();
-
-        }else if (object == MajorReviseButton){
-
-            //点击了专业管理-修改
-            System.out.println(MajorTable.getSelectedRow());
-
-        } else if (object == MajorDelButton) {
-
-            //专业管理页面的删除按钮点击事件
-            int i = MajorTable.getSelectedRow();
-            System.out.println(i);
-            if (i<0){
-                showJDialog("未选择");
-            }else {
-                this.setVisible(false);
-                showChooseJDialog();
-            }
-
         } else if (object == AllButton) {
 
             StudentTable.selectAll();
@@ -555,10 +521,6 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == ClassCounterButton) {
 
             ClassTable.clearSelection();
-
-        } else if (object == MajorAllButton) {
-
-            MajorTable.selectAll();
 
         } else if (object == MajorCounterButton){
 

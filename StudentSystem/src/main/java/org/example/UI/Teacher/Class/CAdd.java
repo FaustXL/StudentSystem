@@ -5,6 +5,7 @@ import org.example.domain.lesson;
 import org.example.server.impl.lessonServerImpl;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +21,8 @@ public class CAdd {
     private lessonServerImpl lessonServer = new lessonServerImpl();
     public CAdd(MainJFrame mainJFrame){
         JFrame frame = new JFrame("CAdd");
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(Main);
         frame.pack();
         frame.setLocationRelativeTo(null);
