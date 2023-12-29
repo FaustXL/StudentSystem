@@ -1,6 +1,10 @@
 package org.example.UI;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import org.example.domain.administrator;
+import org.example.domain.studentUser;
+import org.example.server.impl.administratorServerImpl;
+import org.example.server.impl.studentUserServerImpl;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -75,10 +79,10 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
         Main.setLayout(null);
 
 
-        Font font = new Font("江城黑体 900W",Font.BOLD,18);
+        Font font = new Font("江城黑体 900W",Font.PLAIN,18);
 
 //        Title.setMinimumSize(new Dimension(300,80));
-        Title.setFont(new Font("江城黑体 900W",Font.BOLD,48));
+        Title.setFont(new Font("江城黑体 900W",Font.PLAIN,48));
 
         text1.setBounds(210,115,100,130);
         text2.setBounds(210,190,100,130);
@@ -87,7 +91,7 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
         Main.add(text1);
         Main.add(text2);
 
-        text3.setFont(new Font("江城黑体 900W",Font.BOLD,18));
+        text3.setFont(new Font("江城黑体 900W",Font.PLAIN,18));
 //        text3.setBounds(400,300,200,50);
 //        text3.setMinimumSize(new Dimension(400,60));
 
@@ -130,6 +134,11 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
         Object object = e.getSource();
         if (object == ActionButton){
             System.out.println("Summit");
+            try {
+                Login();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }else if (object == RegisteredButton){
             frame.setVisible(false);
             new registeredFrame();
@@ -158,5 +167,69 @@ public class LoginJFrame extends JFrame implements ActionListener, FocusListener
                 text2.setText("密码");
             }
         }
+    }
+
+    public void Login() throws Exception {
+        String username = textField1.getText();
+        String password = passwordField1.getText();
+        if (comboBox1.getSelectedIndex() == 0) {
+            /*System.out.println("点击了学生");*/
+            if (username.equals("") || password.equals("")) {
+                showJDialog("填写的密码或者账号不能为空");
+            } else {
+                studentUser studentUser = new studentUser();
+                studentUserServerImpl studentUserServer = new studentUserServerImpl();
+                studentUser.setStudentId(username);
+                studentUser.setPassword(password);
+                boolean loginSucceed = studentUserServer.isLoginSucceed(studentUser);
+                if (loginSucceed) {
+                    frame.setVisible(false);
+                    new SMain(studentUser.getStudentId());
+                } else {
+                    showJDialog("账号或密码不正确");
+                }
+            }
+        } else if (comboBox1.getSelectedIndex() == 1) {
+            /*System.out.println("点击了教师");*/
+            administratorServerImpl administratorServer = new administratorServerImpl();
+
+            if (username.equals("") || password.equals("")) {
+                showJDialog("填写的密码或者账号不能为空");
+            } else {
+                administrator administrator = new administrator();
+                administrator.setAdministratorUsername(username);
+                administrator.setAdministratorPassword(password);
+                boolean b = administratorServer.adminLogin(administrator);
+                if (b) {
+                    frame.setVisible(false);
+                    new MainJFrame();
+                } else {
+                    showJDialog("账号或密码不正确");
+                }
+            }
+
+        }
+    }
+
+    public void showJDialog(String content) {
+        //创建一个弹框对象
+        JDialog jDialog = new JDialog();
+        //给弹框设置大小
+        jDialog.setSize(200, 150);
+        //让弹框置顶
+        jDialog.setAlwaysOnTop(true);
+        //让弹框居中
+        jDialog.setLocationRelativeTo(null);
+        //弹框不关闭永远无法操作下面的界面
+        jDialog.setModal(true);
+
+        //创建Jlabel对象管理文字并添加到弹框当中
+        JLabel warning = new JLabel(content);
+        warning.setBounds(0, 0, 200, 150);
+        warning.setHorizontalAlignment(SwingConstants.CENTER);
+        jDialog.getContentPane().add(warning);
+
+        //让弹框展示出来
+        jDialog.setVisible(true);
     }
 }

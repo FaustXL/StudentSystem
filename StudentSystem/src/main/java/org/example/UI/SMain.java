@@ -10,10 +10,7 @@ import org.example.server.impl.studentLessonServeImpl;
 import org.example.server.impl.studentServerImpl;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -131,6 +128,28 @@ public class SMain extends JFrame implements ActionListener {
 
         ClassTable.setModel(data);
         ClassTable.setRowHeight(70);
+
+        ClassTable.getTableHeader().setPreferredSize(new Dimension(-1,50));
+        ClassTable.getTableHeader().setBackground(new Color(239, 247, 253));
+
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (row % 2 == 1) {
+                    setBackground(new Color(247,249,252));
+//                    setForeground(Color.WHITE);
+                }else{
+                    setBackground(Color.WHITE);
+//                    setForeground(Color.WHITE);
+                }
+
+                return super.getTableCellRendererComponent(table, value,
+                        isSelected, hasFocus, row, column);
+            }
+        };
+        int columnCount = ClassTable.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+            ClassTable.getColumn(ClassTable.getColumnName(i)).setCellRenderer(tcr);
+        }
     }
 
     //给元素赋值上学生的信息
@@ -158,7 +177,7 @@ public class SMain extends JFrame implements ActionListener {
             int n = showLoginOutJDialog();
             if (n == 0){
                 frame.setVisible(false);
-                new loginFrame();
+                new LoginJFrame();
             }
         } else if (object == themeComboBox) {
 

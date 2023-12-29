@@ -56,7 +56,7 @@
           <borderPainted value="false"/>
           <focusPainted value="true"/>
           <focusable value="true"/>
-          <font name="江城黑体 900W" size="18"/>
+          <font name="江城黑体 900W" size="18" style="0"/>
           <foreground color="-1"/>
           <margin top="10" left="0" bottom="0" right="0"/>
           <text value="立即注册"/>
