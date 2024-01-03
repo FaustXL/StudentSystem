@@ -61,6 +61,47 @@ public class CAdd {
         });
     }
 
+    public CAdd(MainJFrame mainJFrame,lesson lesson){
+        JFrame frame = new JFrame("CAdd");
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
+        frame.setContentPane(Main);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        ClassNum.setText(lesson.getLessonId());
+        ClassName.setText(lesson.getLessonName());
+        ClassTime.setText(String.valueOf(lesson.getStudyHours()));
+        ClassSorce.setText(String.valueOf(lesson.getCredits()));
+
+        PushButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lesson l = new lesson();
+                l.setLessonName(ClassName.getText());
+                l.setStudyHours(Integer.parseInt(ClassTime.getText()));
+                l.setCredits(Integer.parseInt(ClassSorce.getText()));
+                l.setLessonId(ClassNum.getText());
+
+                try {
+                    int i = lessonServer.updateLesson(l);
+                    if (i > 0){
+                        showJDialog("修改成功");
+                        mainJFrame.getLessonAll();
+                        frame.setVisible(false);
+                    }else {
+                        showJDialog("修改失败");
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
+            }
+        });
+    }
+
     public CAdd(String num){
         JFrame frame = new JFrame("CAdd");
         frame.setContentPane(Main);

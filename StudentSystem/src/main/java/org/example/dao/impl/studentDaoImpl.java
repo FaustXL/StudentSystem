@@ -183,6 +183,7 @@ public class studentDaoImpl implements studentDao {
         preparedStatement.setString(8,s.getStudentAddress());
         preparedStatement.setString(9,s.getStudentTel());
         preparedStatement.setString(10,s.getStudentId());
+        System.out.println(s);
         return preparedStatement.executeUpdate();
     }
 

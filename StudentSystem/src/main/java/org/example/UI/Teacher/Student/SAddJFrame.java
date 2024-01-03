@@ -2,6 +2,7 @@ package org.example.UI.Teacher.Student;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import org.example.UI.MainJFrame;
+import org.example.domain.lesson;
 import org.example.domain.student;
 import org.example.server.impl.studentLessonServeImpl;
 import org.example.server.impl.studentServerImpl;
@@ -39,6 +40,7 @@ public class SAddJFrame{
         frame.setContentPane(SAdd);
         frame.pack();
         frame.setLocationRelativeTo(null);
+
         getItem();
         try {
             getAffiliation();
@@ -86,16 +88,75 @@ public class SAddJFrame{
         });
     }
 
-    public SAddJFrame(String id){
+    public SAddJFrame(MainJFrame mainJFrame,student student){
 
-        JFrame frame = new JFrame(id);
+        JFrame frame = new JFrame(student.getStudentId());
         frame.setPreferredSize(new Dimension(500,400));
+        Image icon = Toolkit.getDefaultToolkit().getImage("image/Logo.png");
+        frame.setIconImage(icon);
         frame.setContentPane(SAdd);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        getItem();
+        try {
+            getAffiliation();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        Phone.setText(student.getStudentTel());
+        Name.setText(student.getStudentName());
+        SexComboBox.setSelectedItem(student.getStudentGender());
+        Address.setText(student.getStudentAddress());
+        AcademyComboBox.setSelectedItem(student.getAffiliation());
+        IDCard.setText(student.getIdCardNumber());
+        AgeComboBox.setSelectedItem(student.getStudentAge());
+        ClassTextField.setText(student.getClasses());
+        MajorTextField.setText(student.getProfessionalName());
+
+
+
+        PushButton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                student s = new student();
+                s.setStudentTel(Phone.getText());
+                s.setIdCardNumber(IDCard.getText());
+                s.setStudentAddress(Address.getText());
+                s.setClasses(ClassTextField.getText());
+                s.setProfessionalName(MajorTextField.getText());
+                s.setStudentName(Name.getText());
+                if (AgeComboBox.getSelectedItem() != null){
+                    s.setStudentAge((int)AgeComboBox.getSelectedItem());
+                }
+                s.setStudentGender(String.valueOf(SexComboBox.getSelectedItem()));
+                System.out.println(AcademyComboBox.getSelectedItem());
+                s.setAffiliation(String.valueOf(AcademyComboBox.getSelectedItem()));
+                s.setStudentId(student.getStudentId());
+                System.out.println(s);
+                int i = 0;
+                try {
+                    i = studentServer.updateStudent(s);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                if (i > 0){
+                    showJDialog("修改成功");
+                    frame.setVisible(false);
+                    mainJFrame.getAllStudent();
+                }else if (i == -2){
+                    showJDialog("填写的数据不能为空");
+                }else if (i == -1){
+                    showJDialog("身份证或电话号码格式错误");
+                }else {
+                    showJDialog("修改失败");
+                }
+            }
+        });
     }
+
 
     public void getAffiliation() throws Exception {
         List<student> affiliation = studentServer.getAffiliation();

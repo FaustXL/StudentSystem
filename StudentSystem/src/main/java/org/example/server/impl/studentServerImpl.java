@@ -122,9 +122,9 @@ public class studentServerImpl implements studentServer {
 
     @Override
     public int updateStudent(student s) throws Exception {
-        if (s.getClasses() == null || s.getStudentTel() == null || s.getStudentAge() == null ||
-                s.getProfessionalName() == null || s.getAffiliation() == null || s.getStudentAddress() == null ||
-                s.getStudentGender() == null || s.getIdCardNumber() == null || s.getStudentName() == null){
+        if (s.getClasses().equals("") || s.getStudentTel().equals("") || s.getStudentAge() == null ||
+                s.getProfessionalName().equals("") || s.getAffiliation().equals("") || s.getStudentAddress().equals("") ||
+                s.getStudentGender().equals("") || s.getIdCardNumber().equals("") || s.getStudentName().equals("")){
             return -2;
         }
         String regexIdCard = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
@@ -140,11 +140,12 @@ public class studentServerImpl implements studentServer {
             return -3;
         }
 
+
         int i = 0;
         try {
             i = studentDao.updateStudent(s);
         } catch (SQLIntegrityConstraintViolationException exception) {
-            System.out.println("服务器繁忙,请稍后再进行插入学生操作");
+            System.out.println("服务器繁忙,请稍后再进行修改学生操作");
         }
         return i;
     }

@@ -9,6 +9,8 @@ import org.example.UI.Teacher.Class.CAdd;
 import org.example.UI.Teacher.Student.SAddJFrame;
 import org.example.UI.Teacher.Student.SInquire;
 import org.example.dao.impl.studentDaoImpl;
+import org.example.domain.lesson;
+import org.example.domain.student;
 import org.example.server.impl.lessonServerImpl;
 import org.example.server.impl.studentServerImpl;
 
@@ -183,6 +185,7 @@ public class MainJFrame extends JFrame implements ActionListener{
                 ClassTime.setText(lesosnTableDatas[row][2]);
                 ClassSorce.setText(lesosnTableDatas[row][3]);
                 ClassPeople.setText(String.valueOf(lessonServer.getLessonPeople(lesosnTableDatas[row][0]).size()));
+
                 System.out.println(row);
             }
         });
@@ -483,7 +486,19 @@ public class MainJFrame extends JFrame implements ActionListener{
             if (i<0){
                 showJDialog("未选择");
             }else {
-                System.out.println("调用修改");
+                student student = new student();
+                student.setStudentId(tabledatas[i][0]);
+                student.setStudentName(tabledatas[i][1]);
+                student.setStudentGender(tabledatas[i][2]);
+                student.setStudentAge(Integer.parseInt(tabledatas[i][3]));
+                student.setIdCardNumber(tabledatas[i][4]);
+                student.setAffiliation(tabledatas[i][5]);
+                student.setClasses(tabledatas[i][6]);
+                student.setProfessionalName(tabledatas[i][7]);
+                student.setStudentAddress(tabledatas[i][8]);
+                student.setStudentTel(tabledatas[i][9]);
+                int i1 = 0;
+                new SAddJFrame(this,student);
             }
 
         } else if (object == ClassAddButton) {
@@ -493,7 +508,19 @@ public class MainJFrame extends JFrame implements ActionListener{
         } else if (object == ClassReviseButton) {
 
             //点击了课程管理-修改
-            System.out.println(ClassTable.getSelectedRow());
+            int i = ClassTable.getSelectedRow();
+            System.out.println(i);
+            if (i == -1){
+                showJDialog("未选择");
+            }else {
+                lesson l = new lesson();
+                l.setLessonName(lesosnTableDatas[i][1]);
+                l.setStudyHours(Integer.parseInt(lesosnTableDatas[i][2]));
+                l.setCredits(Integer.parseInt(lesosnTableDatas[i][3]));
+                l.setLessonId(lesosnTableDatas[i][0]);
+                System.out.println(l);
+                new CAdd(this,l);
+            }
 
         } else if (object == ClassDelButton) {
 
